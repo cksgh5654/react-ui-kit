@@ -3,10 +3,16 @@ import Accordionbutton from "./AccordionButton";
 import AccordionContent from "./AccordionContent";
 
 const Accordion = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndexList, setActiveIndexList] = useState([]);
+
   const onClickAccordionButton = (index) => {
-    setActiveIndex(index);
-    console.log(index);
+    if (activeIndexList.includes(index)) {
+      setActiveIndexList((prev) =>
+        prev.filter((prevIndex) => prevIndex !== index)
+      );
+    } else {
+      setActiveIndexList((prev) => [...prev, index]);
+    }
   };
 
   return (
@@ -16,7 +22,7 @@ const Accordion = () => {
         index={0}
         onClickAccordionButton={onClickAccordionButton}
       />
-      <AccordionContent isActive={activeIndex === 0}>
+      <AccordionContent isActive={activeIndexList.includes(0)}>
         <div>
           <h3>Accordion-Content-1</h3>
         </div>
@@ -28,7 +34,7 @@ const Accordion = () => {
         onClickAccordionButton={onClickAccordionButton}
       />
 
-      <AccordionContent isActive={activeIndex === 0}>
+      <AccordionContent isActive={activeIndexList.includes(1)}>
         <div>
           <h3>Accordion-Content-2</h3>
         </div>
@@ -40,7 +46,7 @@ const Accordion = () => {
         onClickAccordionButton={onClickAccordionButton}
       />
 
-      <AccordionContent isActive={activeIndex === 0}>
+      <AccordionContent isActive={activeIndexList.includes(2)}>
         <div>
           <h3>Accordion-Content-3</h3>
         </div>
