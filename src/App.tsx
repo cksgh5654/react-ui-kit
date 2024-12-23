@@ -1,7 +1,18 @@
-import { Tabs, Carousel, Breadcrumb, Pagination } from "./components";
+import {
+  Tabs,
+  Carousel,
+  Breadcrumb,
+  Pagination,
+  Popover,
+  Calendar,
+} from "./components";
 
 function App() {
   const handleChangeTab = (index: number) => {
+    console.log(index);
+  };
+
+  const handleChangeDate = (index: Date) => {
     console.log(index);
   };
 
@@ -30,11 +41,11 @@ function App() {
         <Carousel.Navigator />
         <Carousel.Indicator />
       </Carousel>
-      {/* <Calendar onChange={handleChangeDate} value={date}>
+      <Calendar onChange={handleChangeDate} value={new Date()}>
         <Calendar.Current />
         <Calendar.Navigator />
         <Calendar.Body />
-      </Calendar> */}
+      </Calendar>
       <Breadcrumb width="100px">
         <Breadcrumb.Item href="/a">1</Breadcrumb.Item>
         <Breadcrumb.Item href="/a-a">2</Breadcrumb.Item>
@@ -46,7 +57,10 @@ function App() {
         <Pagination.Buttons />
         <Pagination.Navigator />
       </Pagination>
-      ;
+      <Popover position="bottom-left">
+        <Popover.Trigger>Open</Popover.Trigger>
+        <Popover.Content>Place content for the popover here.</Popover.Content>
+      </Popover>
     </>
   );
 }

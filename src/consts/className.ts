@@ -33,6 +33,6 @@ export const paginationButtonsCls = getBaseCls("pagination-buttons");
 export const paginationNavigatorCls = getBaseCls("pagination-navigator");
 
 // Popover Component
-export const PopoverBaseCls = getBaseCls("popover");
-export const PopoverTriggerCls = getBaseCls("popover-trigger");
-export const PopoverContentCls = getBaseCls("popover-content");
+export const popoverBaseCls = getBaseCls("popover");
+export const popoverTriggerCls = getBaseCls("popover-trigger");
+export const popoverContentCls = getBaseCls("popover-content");

@@ -1,9 +1,14 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { calendarBodyCls } from "../../consts/className";
 import { CalendarContext } from ".";
 
-const CalendarBody = () => {
-  const { date, setDate } = useContext(CalendarContext);
+interface CalendarBodyProps {
+  className?: string;
+}
+
+const CalendarBody = (props: CalendarBodyProps) => {
+  const { date, setDate, onChange } = useContext(CalendarContext);
+  const { className } = props;
 
   // 달력 연도
   const year = date.getFullYear();
@@ -21,7 +26,7 @@ const CalendarBody = () => {
    * startDay를 setDate로 달의 첫 날 보다 뒤로가게 만듬
    */
 
-  const monthLastDate = new Date(year, month, 0);
+  const monthLastDate = new Date(year, month + 1, 0);
   // 달력 끝 날짜를 현재 달의 마지막 날의 주의 토요일로 설정
   const endDay = new Date(monthLastDate);
   endDay.setDate(monthLastDate.getDate() + (6 - monthLastDate.getDay()));
@@ -57,12 +62,22 @@ const CalendarBody = () => {
 
   const weeks = groupDatesByWeek(startDay, endDay);
 
+  const handleClick = (day: Date) => {
+    setDate(day);
+    onChange(day);
+  };
+
+  const calendarCls = useMemo(
+    () => (className ? `${className} ${calendarBodyCls}` : calendarBodyCls),
+    [className]
+  );
+
   return (
-    <div className={calendarBodyCls}>
+    <div className={calendarCls}>
       {weeks.map((week, weekIndex) => (
         <div key={weekIndex}>
           {week.map((day, dayIndex) => (
-            <button onClick={() => setDate(day)} key={dayIndex}>
+            <button onClick={() => handleClick(day)} key={dayIndex}>
               {day.getDate()}
             </button>
           ))}

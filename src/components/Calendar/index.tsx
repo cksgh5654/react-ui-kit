@@ -21,26 +21,27 @@ interface CalendarCompoundProps {
 interface CalendarContextProps {
   date: Date;
   setDate: Dispatch<SetStateAction<Date>>;
+  onChange: (date: Date) => void;
 }
 
 export const CalendarContext = createContext<CalendarContextProps>({
   date: new Date(),
   setDate: () => {},
+  onChange: () => {},
 });
 
 interface CalendarProps {
   children: ReactNode;
   className?: string;
-  onChange: () => void;
-  value: string;
+  onChange: (date: Date) => void;
+  value: Date;
 }
 
 const Calendar: FC<CalendarProps> & CalendarCompoundProps = (props) => {
-  const [date, setDate] = useState<Date>(new Date());
-  // const { children, className, onChange, value } = props;
-  const { children, className } = props;
+  const { children, className, onChange, value } = props;
+  const [date, setDate] = useState<Date>(value);
 
-  const contextValue = { date, setDate };
+  const contextValue = { date, setDate, onChange };
 
   const calendarCls = useMemo(
     () => (className ? `${className} ${calendarBaseCls}` : calendarBaseCls),
