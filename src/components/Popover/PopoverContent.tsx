@@ -5,7 +5,6 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,
 } from "react";
 import { popoverContentCls } from "../../consts/className";
 import { PopoverContext } from ".";

@@ -1,50 +1,145 @@
-# React + TypeScript + Vite
+### `UI Package(@repo/react-ui-kit)`
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## **Breadcrumb**
 
-Currently, two official plugins are available:
+### Source
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[src/components/Breadcrumb / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Breadcrumb)
 
-## Expanding the ESLint configuration
+### Children
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Root
+- Item
 
-- Configure the top-level `parserOptions` property like this:
+### Example
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```jsx
+<Breadcrumb width="100px">
+  <Breadcrumb.Item href="/a">1</Breadcrumb.Item>
+  <Breadcrumb.Item href="/a-a">2</Breadcrumb.Item>
+  <Breadcrumb.Item href="/a-a-a">3</Breadcrumb.Item>
+  <Breadcrumb.Item href="/a-a-a-a">4</Breadcrumb.Item>
+  <Breadcrumb.Item href="/a-a-a-a-a">5</Breadcrumb.Item>
+</Breadcrumb>
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## **Calendar**
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Source
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+[src/components/Calendar / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Calendar)
+
+### Children
+
+- Root
+- Current
+- Navigator
+- Body
+
+### Example
+
+```jsx
+<Calendar onChange={handleChangeDate} value={new Date()}>
+  <Calendar.Current />
+  <Calendar.Navigator />
+  <Calendar.Body />
+</Calendar>
+```
+
+## **Carousel**
+
+### Source
+
+[src/components/Carousel / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Carousel)
+
+### Children
+
+- Root
+- ItemList
+- Item
+- Navigator
+- Indicator
+
+### Example
+
+```jsx
+<Carousel itemLength={3}>
+  <Carousel.ItemList>
+    <Carousel.Item index={0}></Carousel.Item>
+    <Carousel.Item index={1}></Carousel.Item>
+    <Carousel.Item index={2}></Carousel.Item>
+  </Carousel.ItemList>
+  <Carousel.Navigator />
+  <Carousel.Indicator />
+</Carousel>
+```
+
+## **Pagination**
+
+### Source
+
+[src/components/Pagination / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Pagination)
+
+### Children
+
+- Root
+- Buttons
+- Navigator
+
+### Example
+
+```jsx
+<Pagination total={235} value={0} onPageChange={handlePageChange}>
+  <Pagination.Buttons />
+  <Pagination.Navigator />
+</Pagination>
+```
+
+## **Popover**
+
+### Source
+
+[src/components/Popover / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Popover)
+
+### Children
+
+- Root
+- Trigger
+- Content
+
+### Example
+
+```jsx
+<Popover position="bottom-left">
+  <Popover.Trigger>Open</Popover.Trigger>
+  <Popover.Content>Place content for the popover here.</Popover.Content>
+</Popover>
+```
+
+## **Tabs**
+
+### Source
+
+[src/components/Tabs / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Tabs)
+
+### Children
+
+- Root
+- MenuList
+- Menu
+- Pannel
+
+### Example
+
+```jsx
+<Tabs onChangeTab={handleChangeTab}>
+  <Tabs.MenuList>
+    <Tabs.Menu index={1}>Menu1</Tabs.Menu>
+    <Tabs.Menu index={2}>Menu2</Tabs.Menu>
+    <Tabs.Menu index={3}>Menu3</Tabs.Menu>
+  </Tabs.MenuList>
+  <Tabs.Pannel index={1}>Content1</Tabs.Pannel>
+  <Tabs.Pannel index={2}>Content2</Tabs.Pannel>
+  <Tabs.Pannel index={3}>Content3</Tabs.Pannel>
+</Tabs>
 ```

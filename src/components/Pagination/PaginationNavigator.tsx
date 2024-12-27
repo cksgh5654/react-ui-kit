@@ -37,8 +37,15 @@ const PaginationNavigator = (props: PaginationNavigatorProps) => {
 
   return (
     <div className={paginationCls}>
-      <button onClick={handleClickPrev}>prev</button>
-      <button onClick={handleClickNext}>next</button>
+      <button disabled={currentPage === 0 && true} onClick={handleClickPrev}>
+        prev
+      </button>
+      <button
+        disabled={currentPage + 1 === totalPageLength && true}
+        onClick={handleClickNext}
+      >
+        next
+      </button>
     </div>
   );
 };
