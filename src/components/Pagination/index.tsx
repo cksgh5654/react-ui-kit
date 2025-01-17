@@ -60,12 +60,13 @@ const Pagination: FC<PagenationProps> & PaginationCompoundProps = (props) => {
   );
 
   const firstPageFromCurrent = useMemo(
-    () => Math.floor(currentPage / blockSize) * 10,
+    () => Math.floor(currentPage / blockSize) * blockSize,
     [currentPage, blockSize]
   );
 
   const lastPageFromCurrent = useMemo(() => {
-    const last = Math.floor(currentPage / blockSize) * 10 + 9;
+    const last =
+      Math.floor(currentPage / blockSize) * blockSize + blockSize - 1;
     return last < totalPageLength - 1 ? last : totalPageLength - 1;
   }, [currentPage, blockSize, totalPageLength]);
 

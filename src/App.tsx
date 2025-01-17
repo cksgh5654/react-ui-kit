@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Tabs,
   Carousel,
@@ -5,20 +6,48 @@ import {
   Pagination,
   Popover,
   Calendar,
+  Progress,
+  Modal,
 } from "./components";
+import ExamplePage from "./components/Progress/ExamplePage";
 
 function App() {
+  const [currentPage, setCurrentPage] = useState(0);
+  const totalItems = 400;
+  const pageSize = 10;
+
   const handleChangeTab = (index: number) => {
-    console.log(index);
+    console.log(`Tab changed to index: ${index}`);
   };
 
   const handleChangeDate = (index: Date) => {
-    console.log(index);
+    console.log(`Date changed to: ${index}`);
   };
 
   const handlePageChange = (index: number) => {
-    console.log(index);
+    setCurrentPage(index);
   };
+
+  // Generate dummy data for 400 items
+  const dummyData = Array.from(
+    { length: totalItems },
+    (_, i) => `Item ${i + 1}`
+  );
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
+  // Calculate items for the current page
+  const startIdx = currentPage * pageSize;
+  const endIdx = startIdx + pageSize;
+  const currentPageItems = dummyData.slice(startIdx, endIdx);
 
   return (
     <>
@@ -53,14 +82,58 @@ function App() {
         <Breadcrumb.Item href="/a-a-a-a">4</Breadcrumb.Item>
         <Breadcrumb.Item href="/a-a-a-a-a">5</Breadcrumb.Item>
       </Breadcrumb>
-      <Pagination total={235} value={0} onPageChange={handlePageChange}>
+      <Pagination
+        total={totalItems}
+        value={currentPage}
+        onPageChange={handlePageChange}
+        pageSize={pageSize}
+        blockSize={15}
+      >
         <Pagination.Buttons />
         <Pagination.Navigator />
       </Pagination>
+      <div>
+        <h2>Current Page Items:</h2>
+        <ul>
+          {currentPageItems.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
       <Popover position="bottom-left">
         <Popover.Trigger>Open</Popover.Trigger>
         <Popover.Content>Place content for the popover here.</Popover.Content>
       </Popover>
+      <Modal
+        onOpenModal={handleOpenModal}
+        onCloseModal={handleCloseModal}
+        open={isOpen}
+      >
+        <Modal.Backdrop />
+        <Modal.Trigger>
+          {/** Trigger UI를 사용자 단에서 자유롭게 설정 가능하게. **/}
+
+          <a href="#">열기</a>
+        </Modal.Trigger>
+        <Modal.Content>
+          {/** Close UI를 사용자 단에서 자유롭게 설정 가능하게. **/}
+          <div
+            style={{
+              width: "200px",
+              height: "200px",
+              backgroundColor: "white",
+            }}
+          >
+            <Modal.Close>
+              <button>닫기</button>
+              <button>닫기</button>
+              <button>닫기</button>
+            </Modal.Close>
+            <div>Modal Content</div>
+          </div>
+        </Modal.Content>
+      </Modal>
+      <ExamplePage />
     </>
   );
 }

@@ -21,7 +21,6 @@ const PaginationNavigator = (props: PaginationNavigatorProps) => {
 
   const handleClickNext = () => {
     const changedPageIndex = currentPage + 1;
-    console.log(totalPageLength, changedPageIndex - 1);
     if (totalPageLength <= changedPageIndex) return;
     setCurrentPage(changedPageIndex);
     onPageChange(changedPageIndex);
@@ -37,11 +36,11 @@ const PaginationNavigator = (props: PaginationNavigatorProps) => {
 
   return (
     <div className={paginationCls}>
-      <button disabled={currentPage === 0 && true} onClick={handleClickPrev}>
+      <button disabled={currentPage === 0} onClick={handleClickPrev}>
         prev
       </button>
       <button
-        disabled={currentPage + 1 === totalPageLength && true}
+        disabled={currentPage + 1 === totalPageLength}
         onClick={handleClickNext}
       >
         next
