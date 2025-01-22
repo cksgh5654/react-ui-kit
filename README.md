@@ -74,6 +74,65 @@
 </Carousel>
 ```
 
+## **DatePicker**
+
+### Source
+
+[src/components/DatePicker / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/DatePicker)
+
+### Children
+
+- Root
+
+### Example
+
+```jsx
+<DatePicker date={new Date()} onChangeDate={handleChangeDate} />
+```
+
+## **Modal**
+
+### Source
+
+[src/components/Modal / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Modal)
+
+### Children
+
+- Root
+- Backdrop
+- Close
+- Content
+- Trigger
+
+### Example
+
+```jsx
+<Modal
+  onOpenModal={handleOpenModal}
+  onCloseModal={handleCloseModal}
+  open={isOpen}
+>
+  <Modal.Backdrop />
+  <Modal.Trigger>
+    <a href="#">열기</a>
+  </Modal.Trigger>
+  <Modal.Content>
+    <div
+      style={{
+        width: "200px",
+        height: "200px",
+        backgroundColor: "white",
+      }}
+    >
+      <Modal.Close>
+        <button>닫기</button>
+      </Modal.Close>
+      <div>Modal Content</div>
+    </div>
+  </Modal.Content>
+</Modal>
+```
+
 ## **Pagination**
 
 ### Source
@@ -104,8 +163,8 @@
 ### Children
 
 - Root
-- Trigger
 - Content
+- Trigger
 
 ### Example
 
@@ -114,6 +173,48 @@
   <Popover.Trigger>Open</Popover.Trigger>
   <Popover.Content>Place content for the popover here.</Popover.Content>
 </Popover>
+```
+
+## **Progress**
+
+### Source
+
+[src/components/Progress / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Progress)
+
+### Children
+
+- Root
+
+### Example
+
+```jsx
+<Progress stop={stop} />
+```
+
+## **Select**
+
+### Source
+
+[src/components/Select / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Select)
+
+### Children
+
+- Root
+- Content
+- Item
+- Trigger
+
+### Example
+
+```jsx
+<Select onChange={handleChangeValue} value={selectedValue}>
+  <Select.Trigger />
+  <Select.Content>
+    <Select.Item value={"1"}>One</Select.Item>
+    <Select.Item value={"2"}>Two</Select.Item>
+    <Select.Item value={"3"}>Three</Select.Item>
+  </Select.Content>
+</Select>
 ```
 
 ## **Tabs**

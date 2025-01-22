@@ -18,19 +18,17 @@ const DatePicker: FC<DatePickerProps> = (props) => {
   );
 
   return (
-    <div className={datePickerCls}>
-      <Popover position="bottom-left">
-        <Calendar onChange={onChangeDate} value={date}>
-          <Popover.Trigger>
-            <Calendar.Current />
-          </Popover.Trigger>
-          <Popover.Content>
-            <Calendar.Navigator />
-            <Calendar.Body />
-          </Popover.Content>
-        </Calendar>
-      </Popover>
-    </div>
+    <Popover className={datePickerCls} position="bottom-left">
+      <Calendar onChange={onChangeDate} value={date}>
+        <Popover.Trigger>
+          <Calendar.Current />
+        </Popover.Trigger>
+        <Popover.Content>
+          <Calendar.Navigator />
+          <Calendar.Body />
+        </Popover.Content>
+      </Calendar>
+    </Popover>
   );
 };
 export default DatePicker;
