@@ -4,7 +4,7 @@ import { PopoverContext } from ".";
 
 interface PopoverTriggerProps {
   className?: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const PopoverTrigger = (props: PopoverTriggerProps) => {
@@ -42,7 +42,7 @@ const PopoverTrigger = (props: PopoverTriggerProps) => {
 
   return (
     <button onClick={handleClick} ref={buttonRef} className={popoverCls}>
-      {children}
+      {children ? children : "Open"}
     </button>
   );
 };

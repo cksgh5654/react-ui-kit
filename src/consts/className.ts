@@ -46,3 +46,12 @@ export const modalBackdropCls = getBaseCls("modal-backdrop");
 export const modalTriggerCls = getBaseCls("modal-trigger");
 export const modalContentCls = getBaseCls("modal-content");
 export const modalCloseCls = getBaseCls("modal-close");
+
+// DatePicker Component
+export const datePickerBaseCls = getBaseCls("datePicker");
+
+// DatePicker Component
+export const selectBaseCls = getBaseCls("select");
+export const selectContentCls = getBaseCls("select-content");
+export const selectItemCls = getBaseCls("select-item");
+export const selectTirggerCls = getBaseCls("select-trigger");
