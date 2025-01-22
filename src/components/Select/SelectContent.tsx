@@ -1,6 +1,6 @@
 import { ReactNode, useMemo } from "react";
-import { selectContentCls } from "../../consts/className";
-import Popover from "../Popover";
+import Popover from "@ui/Popover";
+import { selectContentCls } from "@consts/className";
 
 interface SelectContentProps {
   children: ReactNode;

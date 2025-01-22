@@ -1,5 +1,5 @@
+import { carouselItemListCls } from "@consts/className";
 import { ReactNode, useMemo } from "react";
-import { carouselItemListCls } from "../../consts/className";
 
 interface CarouselItemListProps {
   children: ReactNode;
@@ -9,13 +9,13 @@ interface CarouselItemListProps {
 const CarouselItemList = (props: CarouselItemListProps) => {
   const { children, className } = props;
 
-  const carouselCls = useMemo(
+  const cls = useMemo(
     () =>
       className ? `${className} ${carouselItemListCls}` : carouselItemListCls,
-    []
+    [className]
   );
 
-  return <div className={carouselCls}>{children}</div>;
+  return <div className={cls}>{children}</div>;
 };
 
 export default CarouselItemList;

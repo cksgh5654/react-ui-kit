@@ -9,7 +9,7 @@ import {
 } from "react";
 import PaginationButtons from "./PaginationButtons";
 import PaginationNavigator from "./PaginationNavigator";
-import { paginationBaseCls } from "../../consts/className";
+import { paginationBaseCls } from "@consts/className";
 
 interface PaginationCompoundProps {
   Buttons: typeof PaginationButtons;
@@ -92,14 +92,14 @@ const Pagination: FC<PagenationProps> & PaginationCompoundProps = (props) => {
     pages,
   };
 
-  const paginationCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${paginationBaseCls}` : paginationBaseCls),
-    []
+    [className]
   );
 
   return (
     <PaginationContext.Provider value={contextValue}>
-      <div className={paginationCls}>{children}</div>
+      <div className={cls}>{children}</div>
     </PaginationContext.Provider>
   );
 };

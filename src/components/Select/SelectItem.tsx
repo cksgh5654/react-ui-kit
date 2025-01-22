@@ -1,6 +1,6 @@
 import { ReactNode, useContext, useMemo } from "react";
-import { selectItemCls } from "../../consts/className";
 import { SelectContext } from ".";
+import { selectItemCls } from "@consts/className";
 
 interface SelectItemProps {
   children: ReactNode;

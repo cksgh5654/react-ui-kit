@@ -1,7 +1,7 @@
 import { useContext, useMemo } from "react";
-import { selectTirggerCls } from "../../consts/className";
-import Popover from "../Popover";
 import { SelectContext } from ".";
+import { selectTirggerCls } from "@consts/className";
+import Popover from "@ui/Popover";
 
 interface SelectTriggerProps {
   className?: string;

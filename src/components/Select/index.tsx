@@ -7,11 +7,11 @@ import {
   useMemo,
   useState,
 } from "react";
-import { selectBaseCls } from "../../consts/className";
 import SelectTrigger from "./SelectTrigger";
 import SelectContent from "./SelectContent";
 import SelectItem from "./SelectItem";
-import Popover from "../Popover";
+import { selectBaseCls } from "@consts/className";
+import Popover from "@ui/Popover";
 
 interface SelectCompoundProps {
   Trigger: typeof SelectTrigger;

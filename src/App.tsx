@@ -124,12 +124,9 @@ function App() {
       >
         <Modal.Backdrop />
         <Modal.Trigger>
-          {/** Trigger UI를 사용자 단에서 자유롭게 설정 가능하게. **/}
-
           <a href="#">열기</a>
         </Modal.Trigger>
         <Modal.Content>
-          {/** Close UI를 사용자 단에서 자유롭게 설정 가능하게. **/}
           <div
             style={{
               width: "200px",
@@ -138,8 +135,6 @@ function App() {
             }}
           >
             <Modal.Close>
-              <button>닫기</button>
-              <button>닫기</button>
               <button>닫기</button>
             </Modal.Close>
             <div>Modal Content</div>

@@ -11,7 +11,7 @@ import {
   useState,
 } from "react";
 import BreadcrumbItem from "./BreadcrumbItem";
-import { breadcrumbBaseCls } from "../../consts/className";
+import { breadcrumbBaseCls } from "@consts/className";
 
 interface BreadcrumbCompoundProps {
   Item: typeof BreadcrumbItem;
@@ -40,7 +40,7 @@ const Breadcrumb: FC<BreadcrumbProps> & BreadcrumbCompoundProps = (props) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const seperatorRef = useRef<HTMLSpanElement>(null);
 
-  const breadcrumbCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${breadcrumbBaseCls}` : breadcrumbBaseCls),
     []
   );
@@ -82,7 +82,7 @@ const Breadcrumb: FC<BreadcrumbProps> & BreadcrumbCompoundProps = (props) => {
 
   return (
     <BreadcrumbContext.Provider value={contextValue}>
-      <div style={{ width: width }} className={breadcrumbCls}>
+      <div style={{ width: width }} className={cls}>
         {isSpillOver ? (
           <>
             <span>{firstItem}</span>

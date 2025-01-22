@@ -1,9 +1,9 @@
 import { createContext, FC, ReactNode, useMemo } from "react";
-import { modalBaseCls } from "../../consts/className";
 import ModalBackdrop from "./ModalBackdrop";
 import ModalContent from "./ModalContent";
 import ModalTrigger from "./ModalTrigger";
 import ModalClose from "./ModalClose";
+import { modalBaseCls } from "@consts/className";
 
 interface ModalCompoundProps {
   Backdrop: typeof ModalBackdrop;
@@ -41,14 +41,14 @@ const Modal: FC<ModalProps> & ModalCompoundProps = (props) => {
     open,
   };
 
-  const modalCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${modalBaseCls}` : modalBaseCls),
-    []
+    [className]
   );
 
   return (
     <ModalContext.Provider value={contextValue}>
-      <div className={modalCls}>{children}</div>
+      <div className={cls}>{children}</div>
     </ModalContext.Provider>
   );
 };

@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
-import { paginationButtonsCls } from "../../consts/className";
 import { PaginationContext } from ".";
+import { paginationButtonsCls } from "@consts/className";
 
 interface PaginationButtons {
   className?: string;
@@ -17,14 +17,14 @@ const PaginationButtons = (props: PaginationButtons) => {
     onPageChange(index);
   };
 
-  const paginationCls = useMemo(
+  const cls = useMemo(
     () =>
       className ? `${className} ${paginationButtonsCls}` : paginationButtonsCls,
-    []
+    [className]
   );
 
   return (
-    <div className={paginationCls}>
+    <div className={cls}>
       {pages.map((pageIndex) => (
         <button
           key={`paginator-button-key-${pageIndex}`}

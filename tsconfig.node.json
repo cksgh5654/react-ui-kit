@@ -19,7 +19,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@ui/*": ["./src/components/*"],
+      "@consts/*": ["./src/consts/*"]
+    }
     // "noUncheckedSideEffectImports": true
   },
   "include": ["src/components"]

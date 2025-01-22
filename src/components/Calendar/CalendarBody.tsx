@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
-import { calendarBodyCls } from "../../consts/className";
 import { CalendarContext } from ".";
+import { calendarBodyCls } from "@consts/className";
 
 interface CalendarBodyProps {
   className?: string;
@@ -67,13 +67,13 @@ const CalendarBody = (props: CalendarBodyProps) => {
     onChange(day);
   };
 
-  const calendarCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${calendarBodyCls}` : calendarBodyCls),
     [className]
   );
 
   return (
-    <div className={calendarCls}>
+    <div className={cls}>
       {weeks.map((week, weekIndex) => (
         <div key={weekIndex}>
           {week.map((day, dayIndex) => (

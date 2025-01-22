@@ -10,7 +10,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { calendarBaseCls } from "../../consts/className";
+import { calendarBaseCls } from "@consts/className";
 
 interface CalendarCompoundProps {
   Current: typeof CalendarCurrent;
@@ -43,14 +43,14 @@ const Calendar: FC<CalendarProps> & CalendarCompoundProps = (props) => {
 
   const contextValue = { date, setDate, onChange };
 
-  const calendarCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${calendarBaseCls}` : calendarBaseCls),
     [className]
   );
 
   return (
     <CalendarContext.Provider value={contextValue}>
-      <div className={calendarCls}>{children}</div>
+      <div className={cls}>{children}</div>
     </CalendarContext.Provider>
   );
 };

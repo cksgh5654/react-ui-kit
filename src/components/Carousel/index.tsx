@@ -11,7 +11,7 @@ import CarouselItemList from "./CarouselItemList";
 import CarouselItem from "./CarouselItem";
 import CarouselNavigator from "./CarouselNavigator";
 import CarouselIndicator from "./CarouselIndicator";
-import { carouselBaseCls } from "../../consts/className";
+import { carouselBaseCls } from "@consts/className";
 
 interface CarouselCompoundProps {
   ItemList: typeof CarouselItemList;
@@ -48,14 +48,14 @@ const Carousel: FC<CarouselProps> & CarouselCompoundProps = (props) => {
     setCarouselIndex,
   };
 
-  const carouselCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${carouselBaseCls}` : carouselBaseCls),
-    []
+    [className]
   );
 
   return (
     <CarouselContext.Provider value={contextValue}>
-      <div className={carouselCls}>{children}</div>
+      <div className={cls}>{children}</div>
     </CarouselContext.Provider>
   );
 };

@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
-import { calendarNavigatorCls } from "../../consts/className";
 import { CalendarContext } from ".";
+import { calendarNavigatorCls } from "@consts/className";
 
 interface CalendarNavigatorProps {
   className?: string;
@@ -24,14 +24,14 @@ const CalendarNavigator = (props: CalendarNavigatorProps) => {
     onChange(currentDate);
   };
 
-  const calendarCls = useMemo(
+  const cls = useMemo(
     () =>
       className ? `${className} ${calendarNavigatorCls}` : calendarNavigatorCls,
     [className]
   );
 
   return (
-    <div className={calendarCls}>
+    <div className={cls}>
       <button onClick={handlePrev}>&lt;</button>
       <button onClick={handleNext}>&gt;</button>
     </div>

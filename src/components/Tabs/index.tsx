@@ -10,7 +10,7 @@ import {
 import TabMenuList from "./TapMenuList";
 import TabMenu from "./TabMenu";
 import TabPanel from "./TabPannel";
-import { tabsBaseCls } from "../../consts/className";
+import { tabsBaseCls } from "@consts/className";
 
 interface TabsCompoundProps {
   MenuList: typeof TabMenuList;
@@ -54,14 +54,14 @@ const Tabs: FC<TapsProps> & TabsCompoundProps = (props) => {
     children,
   };
 
-  const tabsCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${tabsBaseCls}` : tabsBaseCls),
-    []
+    [className]
   );
 
   return (
     <TabsContext.Provider value={contextValue}>
-      <div className={tabsCls}>{children}</div>
+      <div className={cls}>{children}</div>
     </TabsContext.Provider>
   );
 };

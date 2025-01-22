@@ -1,7 +1,7 @@
 import { useContext, ReactNode, useMemo, useRef, useEffect } from "react";
 import { ModalContext } from ".";
-import { modalContentCls } from "../../consts/className";
 import { createPortal } from "react-dom";
+import { modalContentCls } from "@consts/className";
 
 interface ModalContentProps {
   className?: string;

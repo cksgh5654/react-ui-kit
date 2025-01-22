@@ -1,6 +1,6 @@
 import { ReactNode, useContext, useMemo } from "react";
 import { TabsContext } from ".";
-import { tabsMenuBaseCls } from "../../consts/className";
+import { tabsMenuBaseCls } from "@consts/className";
 
 interface TabMenuProps {
   index: number;
@@ -14,14 +14,14 @@ const TabMenu = (props: TabMenuProps) => {
 
   const isActive = useMemo(() => tabIndex === index, [tabIndex, index]);
 
-  const tabsCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${tabsMenuBaseCls}` : tabsMenuBaseCls),
-    []
+    [className]
   );
 
   return (
     <div
-      className={tabsCls}
+      className={cls}
       data-active={isActive}
       onClick={() => handleClick(index)}
     >

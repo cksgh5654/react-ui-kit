@@ -1,7 +1,7 @@
 import { FC, useMemo } from "react";
-import { datePickerBaseCls } from "../../consts/className";
-import Popover from "../Popover";
-import Calendar from "../Calendar";
+import Popover from "@ui/Popover";
+import Calendar from "@ui/Calendar";
+import { datePickerBaseCls } from "@consts/className";
 
 interface DatePickerProps {
   className?: string;
@@ -12,13 +12,13 @@ interface DatePickerProps {
 const DatePicker: FC<DatePickerProps> = (props) => {
   const { className, date, onChangeDate } = props;
 
-  const datePickerCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${datePickerBaseCls}` : datePickerBaseCls),
     [className]
   );
 
   return (
-    <Popover className={datePickerCls} position="bottom-left">
+    <Popover className={cls} position="bottom-left">
       <Calendar onChange={onChangeDate} value={date}>
         <Popover.Trigger>
           <Calendar.Current />

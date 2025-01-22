@@ -1,6 +1,6 @@
 import { FC, ReactNode, useContext, useEffect, useMemo, useRef } from "react";
-import { breadcrumbItemCls } from "../../consts/className";
 import { BreadcrumbContext } from ".";
+import { breadcrumbItemCls } from "@consts/className";
 
 interface BreadcrumbItemProps {
   children: ReactNode;
@@ -19,13 +19,13 @@ const BreadcrumbItem: FC<BreadcrumbItemProps> = (props) => {
     );
   }, []);
 
-  const breadcrumbCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${breadcrumbItemCls}` : breadcrumbItemCls),
-    []
+    [className]
   );
 
   return (
-    <a href={href} ref={itemRef} className={breadcrumbCls}>
+    <a href={href} ref={itemRef} className={cls}>
       {children}
     </a>
   );

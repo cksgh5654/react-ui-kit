@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
-import { calendarCurrentCls } from "../../consts/className";
 import { CalendarContext } from ".";
+import { calendarCurrentCls } from "@consts/className";
 
 const arrDayStr = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -22,13 +22,13 @@ const CalendarCurrent = (props: CalendarCurrentProps) => {
     arrDayStr[date.getDay()] +
     ")";
 
-  const calendarCls = useMemo(
+  const cls = useMemo(
     () =>
       className ? `${className} ${calendarCurrentCls}` : calendarCurrentCls,
     [className]
   );
 
-  return <div className={calendarCls}>{currentDate}</div>;
+  return <div className={cls}>{currentDate}</div>;
 };
 
 export default CalendarCurrent;

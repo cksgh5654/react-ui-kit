@@ -6,9 +6,9 @@ import {
   useMemo,
   useRef,
 } from "react";
-import { popoverContentCls } from "../../consts/className";
 import { PopoverContext } from ".";
 import { createPortal } from "react-dom";
+import { popoverContentCls } from "@consts/className";
 
 interface PopoverContentProps {
   className?: string;
@@ -62,9 +62,9 @@ const PopoverContent = (props: PopoverContentProps) => {
     };
   };
 
-  const popoverCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${popoverContentCls}` : popoverContentCls),
-    []
+    [className]
   );
   return (
     <>
@@ -74,7 +74,7 @@ const PopoverContent = (props: PopoverContentProps) => {
             id="my-popover"
             style={contentPosition()}
             ref={contentRef}
-            className={popoverCls}
+            className={cls}
           >
             {children}
           </div>,

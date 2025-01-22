@@ -4,13 +4,12 @@ import {
   FC,
   ReactNode,
   SetStateAction,
-  useEffect,
   useMemo,
   useState,
 } from "react";
 import PopoverTrigger from "./PopoverTrigger";
 import PopoverContent from "./PopoverContent";
-import { popoverBaseCls } from "../../consts/className";
+import { popoverBaseCls } from "@consts/className";
 
 interface PopoverCompoundProps {
   Trigger: typeof PopoverTrigger;
@@ -52,14 +51,14 @@ const Popover: FC<PopoverProps> & PopoverCompoundProps = (props) => {
     position,
   };
 
-  const popoverCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${popoverBaseCls}` : popoverBaseCls),
-    []
+    [className]
   );
 
   return (
     <PopoverContext.Provider value={contextValue}>
-      <div className={popoverCls}>{children}</div>
+      <div className={cls}>{children}</div>
     </PopoverContext.Provider>
   );
 };

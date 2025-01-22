@@ -7,8 +7,8 @@ import {
   useContext,
   useMemo,
 } from "react";
-import { modalCloseCls } from "../../consts/className";
 import { ModalContext } from ".";
+import { modalCloseCls } from "@consts/className";
 
 interface ModalCloseProps {
   className?: string;

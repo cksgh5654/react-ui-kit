@@ -1,6 +1,6 @@
 import { FC, useEffect, useMemo, useState } from "react";
-import { progressBaseCls } from "../../consts/className";
 import "./Progress.css";
+import { progressBaseCls } from "@consts/className";
 
 interface ProgressProps {
   className?: string;
@@ -32,15 +32,15 @@ const Progress: FC<ProgressProps> = (props) => {
     };
   }, [stop]);
 
-  const progressCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${progressBaseCls}` : progressBaseCls),
-    []
+    [className]
   );
   return (
     <>
       <progress
         value={value}
-        className={progressCls}
+        className={cls}
         style={{ display: value >= 1 ? "none" : "block" }}
       />
     </>

@@ -1,7 +1,7 @@
 import { useContext, useMemo } from "react";
 import { ModalContext } from ".";
-import { modalBackdropCls } from "../../consts/className";
 import { createPortal } from "react-dom";
+import { modalBackdropCls } from "@consts/className";
 
 interface ModalBackdropProps {
   className?: string;

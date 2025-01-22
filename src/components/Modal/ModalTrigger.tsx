@@ -7,8 +7,8 @@ import {
   useContext,
   useMemo,
 } from "react";
-import { modalTriggerCls } from "../../consts/className";
 import { ModalContext } from ".";
+import { modalTriggerCls } from "@consts/className";
 
 interface ModalTriggerProps {
   className?: string;

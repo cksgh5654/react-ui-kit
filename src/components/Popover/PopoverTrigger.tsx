@@ -1,6 +1,6 @@
 import { ReactNode, useContext, useEffect, useMemo, useRef } from "react";
-import { popoverTriggerCls } from "../../consts/className";
 import { PopoverContext } from ".";
+import { popoverTriggerCls } from "@consts/className";
 
 interface PopoverTriggerProps {
   className?: string;
@@ -31,9 +31,9 @@ const PopoverTrigger = (props: PopoverTriggerProps) => {
     };
   }, [isOpen]);
 
-  const popoverCls = useMemo(
+  const cls = useMemo(
     () => (className ? `${className} ${popoverTriggerCls}` : popoverTriggerCls),
-    []
+    [className]
   );
 
   const handleClick = () => {
@@ -41,7 +41,7 @@ const PopoverTrigger = (props: PopoverTriggerProps) => {
   };
 
   return (
-    <button onClick={handleClick} ref={buttonRef} className={popoverCls}>
+    <button onClick={handleClick} ref={buttonRef} className={cls}>
       {children ? children : "Open"}
     </button>
   );
