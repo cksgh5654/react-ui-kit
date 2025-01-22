@@ -1,14 +1,19 @@
-import { useContext, useMemo } from "react";
+import { ReactNode, useContext, useMemo } from "react";
 import { CarouselContext } from ".";
 import { carouselIndicatorCls } from "@consts/className";
 
 interface CarouselIndicatorProps {
   className?: string;
+  children?: (indexes: number[], to: (index: number) => void) => ReactNode;
 }
 
 const CarouselIndicator = (props: CarouselIndicatorProps) => {
-  const { itemLength } = useContext(CarouselContext);
-  const { className } = props;
+  const { itemLength, setCarouselIndex } = useContext(CarouselContext);
+  const { className, children } = props;
+
+  const hadleClickIndicator = (index: number) => {
+    setCarouselIndex(index);
+  };
 
   const cls = useMemo(
     () =>
@@ -17,9 +22,18 @@ const CarouselIndicator = (props: CarouselIndicatorProps) => {
   );
   return (
     <div className={cls}>
-      {Array.from({ length: itemLength }).map((_, index) => {
-        return <div key={index}></div>;
-      })}
+      {children && typeof children === "function"
+        ? children(
+            Array.from({ length: itemLength }, (_, index) => index),
+            hadleClickIndicator
+          )
+        : Array.from({ length: itemLength }).map((_, index) => {
+            return (
+              <span onClick={() => hadleClickIndicator(index)} key={index}>
+                {index + 1}
+              </span>
+            );
+          })}
     </div>
   );
 };

@@ -69,8 +69,23 @@
     <Carousel.Item index={1}></Carousel.Item>
     <Carousel.Item index={2}></Carousel.Item>
   </Carousel.ItemList>
-  <Carousel.Navigator />
-  <Carousel.Indicator />
+  <Carousel.Navigator>
+    {(prev, next) => (
+      <div>
+        <span onClick={prev}>이전</span>
+        <span onClick={next}>다음</span>
+      </div>
+    )}
+  </Carousel.Navigator>
+  <Carousel.Indicator>
+    {(indexes, to) =>
+      indexes.map((index) => (
+        <span key={index} onClick={() => to(index)}>
+          {index + 1}
+        </span>
+      ))
+    }
+  </Carousel.Indicator>
 </Carousel>
 ```
 
