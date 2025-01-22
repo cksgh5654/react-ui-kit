@@ -62,6 +62,22 @@
 
 ### Example
 
+#### 캐러셀 기본
+
+```jsx
+<Carousel itemLength={3}>
+  <Carousel.ItemList>
+    <Carousel.Item index={0}></Carousel.Item>
+    <Carousel.Item index={1}></Carousel.Item>
+    <Carousel.Item index={2}></Carousel.Item>
+  </Carousel.ItemList>
+  <Carousel.Navigator />
+  <Carousel.Indicator />
+</Carousel>
+```
+
+#### 캐러셀 커스텀(내비게이터, 인디게이터)
+
 ```jsx
 <Carousel itemLength={3}>
   <Carousel.ItemList>
