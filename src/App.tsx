@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Tabs,
   Carousel,
   Breadcrumb,
   Pagination,
-  Popover,
   Calendar,
-  Progress,
   Modal,
   DatePicker,
   Select,
