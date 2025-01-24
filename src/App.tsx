@@ -8,6 +8,7 @@ import {
   Modal,
   DatePicker,
   Select,
+  Accordion,
 } from "./components";
 import ExamplePage from "./components/Progress/ExamplePage";
 
@@ -169,6 +170,16 @@ function App() {
           <Select.Item value={"3"}>Three</Select.Item>
         </Select.Content>
       </Select>
+      <Accordion>
+        <Accordion.Item value="item-1">
+          <Accordion.Trigger>item-1 trigger</Accordion.Trigger>
+          <Accordion.Content>item-1 Content.</Accordion.Content>
+        </Accordion.Item>
+        <Accordion.Item value="item-2">
+          <Accordion.Trigger>item-2 trigger</Accordion.Trigger>
+          <Accordion.Content>item-2 Content.</Accordion.Content>
+        </Accordion.Item>
+      </Accordion>
       <ul>
         <li style={{ height: "100px" }}>content</li>
         <li style={{ height: "100px" }}>content</li>

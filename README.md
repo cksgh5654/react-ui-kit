@@ -1,5 +1,33 @@
 ### `UI Package(@repo/react-ui-kit)`
 
+## **Accordion**
+
+### Source
+
+[src/components/Accordion / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Accordion)
+
+### Children
+
+- Root
+- Item
+- Trigger
+- Content
+
+### Example
+
+```jsx
+<Accordion>
+  <Accordion.Item value="item-1">
+    <Accordion.Trigger>item-1 trigger</Accordion.Trigger>
+    <Accordion.Content>item-1 Content.</Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item value="item-2">
+    <Accordion.Trigger>item-2 trigger</Accordion.Trigger>
+    <Accordion.Content>item-2 Content.</Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
 ## **Breadcrumb**
 
 ### Source
