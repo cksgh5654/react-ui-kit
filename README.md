@@ -323,6 +323,7 @@ const ExamplePage = () => {
     toast({
       title: "ToastTitle",
       description: "ToastDescription",
+      duration: 5000,
     });
   };
   return <button onClick={handleClickOpenToast}>open toast</button>;
