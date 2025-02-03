@@ -303,3 +303,37 @@
   <Tabs.Pannel index={3}>Content3</Tabs.Pannel>
 </Tabs>
 ```
+
+## **Toast**
+
+### Source
+
+[src/components/Toast / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Toast)
+
+### Children
+
+- Root
+
+### Example
+
+```jsx
+const ExamplePage = () => {
+  const { toast } = useToast();
+  const handleClickOpenToast = () => {
+    toast({
+      title: "ToastTitle",
+      description: "ToastDescription",
+    });
+  };
+  return <button onClick={handleClickOpenToast}>open toast</button>;
+};
+
+function App() {
+  return (
+    <>
+      <ExamplePage />
+      <Toaster position="top-center" />
+    </>
+  );
+}
+```

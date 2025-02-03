@@ -9,6 +9,7 @@ import {
   DatePicker,
   Select,
   Accordion,
+  Toaster,
 } from "./components";
 import ExamplePage from "./components/Progress/ExamplePage";
 
@@ -180,6 +181,7 @@ function App() {
           <Accordion.Content>item-2 Content.</Accordion.Content>
         </Accordion.Item>
       </Accordion>
+
       <ul>
         <li style={{ height: "100px" }}>content</li>
         <li style={{ height: "100px" }}>content</li>
@@ -191,6 +193,7 @@ function App() {
         <li style={{ height: "100px" }}>content</li>
         <li style={{ height: "100px" }}>content</li>
       </ul>
+      <Toaster position="top-center" />
     </>
   );
 }
