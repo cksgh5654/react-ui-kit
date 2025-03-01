@@ -22,28 +22,31 @@ interface CarouselCompoundProps {
 
 interface CarouselContextProps {
   itemLength: number;
+  setItemLength: Dispatch<SetStateAction<number>>;
   carouselIndex: number;
   setCarouselIndex: Dispatch<SetStateAction<number>>;
 }
 
 interface CarouselProps {
-  itemLength: number;
   children: ReactNode;
   className?: string;
 }
 
 export const CarouselContext = createContext<CarouselContextProps>({
   itemLength: 0,
+  setItemLength: () => {},
   carouselIndex: 0,
   setCarouselIndex: () => {},
 });
 
 const Carousel: FC<CarouselProps> & CarouselCompoundProps = (props) => {
   const [carouselIndex, setCarouselIndex] = useState<number>(0);
-  const { itemLength, children, className } = props;
+  const [itemLength, setItemLength] = useState<number>(0);
+  const { children, className } = props;
 
   const contextValue = {
     itemLength,
+    setItemLength,
     carouselIndex,
     setCarouselIndex,
   };

@@ -6,11 +6,12 @@ import { modalContentCls } from "@consts/className";
 interface ModalContentProps {
   className?: string;
   children: ReactNode;
+  fixed?: boolean;
 }
 
 const ModalContent = (props: ModalContentProps) => {
-  const { open, onCloseModal } = useContext(ModalContext);
-  const { className, children } = props;
+  const { open, onCloseModal, portalref } = useContext(ModalContext);
+  const { className, children, fixed } = props;
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -39,20 +40,29 @@ const ModalContent = (props: ModalContentProps) => {
       {open &&
         createPortal(
           <div
-            style={{ position: "absolute" }}
+            style={
+              fixed
+                ? {
+                    position: "fixed",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }
+                : {
+                    position: "absolute",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                  }
+            }
             ref={contentRef}
             className={cls}
           >
             {children}
           </div>,
-          document.body
+          portalref || document.body
         )}
     </>
   );
 };
 
 export default ModalContent;
-
-// 컨텐츠내부에 클로즈가 렌더링
-// 칠드런안에 클로즈를 빼오고
-// 클로즈와 클로즈가 아닌것들 분류

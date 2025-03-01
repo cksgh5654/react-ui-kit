@@ -27,6 +27,27 @@ export const calendarNavigatorCls = getBaseCls("calendar-navigator");
 export const breadcrumbBaseCls = getBaseCls("breadcrumb");
 export const breadcrumbItemCls = getBaseCls("breadcrumb-item");
 
+// carouselInfinite Component
+export const carouselInfiniteBaseCls = getBaseCls("carousel-infinite");
+export const carouselInfiniteItemContainerCls = getBaseCls(
+  "carousel-infinite-item-container"
+);
+export const carouselInfiniteItemListCls = getBaseCls("carousel-infinite-list");
+export const carouselInfiniteItemCls = getBaseCls("carousel-infinite-item");
+export const carouselInfiniteNavigatorCls = getBaseCls(
+  "carousel-infinite-navigator"
+);
+
+// CarouselXscroll Component
+export const carouselXscrollBaseCls = getBaseCls("carouselXscroll");
+export const carouselXscrollItemContainerCls = getBaseCls(
+  "carouselXscroll-item-container"
+);
+export const carouselXscrollItemsCls = getBaseCls("carouselXscroll-items");
+export const carouselXscrollNavigatorCls = getBaseCls(
+  "carouselXscroll-navigator"
+);
+
 // Pagination Component
 export const paginationBaseCls = getBaseCls("pagination");
 export const paginationButtonsCls = getBaseCls("pagination-buttons");

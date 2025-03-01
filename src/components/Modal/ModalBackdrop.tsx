@@ -8,7 +8,7 @@ interface ModalBackdropProps {
 }
 
 const ModalBackdrop = (props: ModalBackdropProps) => {
-  const { open } = useContext(ModalContext);
+  const { open, portalref } = useContext(ModalContext);
   const { className } = props;
   const cls = useMemo(
     () => (className ? `${className} ${modalBackdropCls}` : modalBackdropCls),
@@ -21,15 +21,14 @@ const ModalBackdrop = (props: ModalBackdropProps) => {
         createPortal(
           <div
             style={{
+              top: 0,
               width: "100vw",
               height: "100vh",
-              position: "absolute",
-              backgroundColor: "black",
-              opacity: "0.2",
+              position: "fixed",
             }}
             className={cls}
           ></div>,
-          document.body
+          portalref || document.body
         )}
     </>
   );

@@ -1,16 +1,22 @@
-import { useContext, useMemo } from "react";
+import { HTMLAttributes, ReactNode, useContext } from "react";
 import { PaginationContext } from ".";
-import { paginationNavigatorCls } from "@consts/className";
+import NavigatorButton from "./icons/NavigatorButton";
+import NavigatorButtonFirstLast from "./icons/NavigatorButtonFirstLast";
 
-interface PaginationNavigatorProps {
-  className?: string;
+interface PaginationNavigatorProps extends HTMLAttributes<HTMLDivElement> {
+  children?: ReactNode;
 }
 
 const PaginationNavigator = (props: PaginationNavigatorProps) => {
-  const { currentPage, setCurrentPage, onPageChange, totalPageLength } =
-    useContext(PaginationContext);
+  const {
+    currentPage,
+    setCurrentPage,
+    onPageChange,
+    totalPageLength,
+    blockSize,
+  } = useContext(PaginationContext);
 
-  const { className } = props;
+  const { children } = props;
 
   const handleClickPrev = () => {
     if (currentPage === 0) return;
@@ -26,25 +32,65 @@ const PaginationNavigator = (props: PaginationNavigatorProps) => {
     onPageChange(changedPageIndex);
   };
 
-  const cls = useMemo(
-    () =>
-      className
-        ? `${className} ${paginationNavigatorCls}`
-        : paginationNavigatorCls,
-    [className]
-  );
+  const handleClickFirst = () => {
+    setCurrentPage(0);
+    onPageChange(0);
+  };
+
+  const handleClickLast = () => {
+    setCurrentPage(totalPageLength - 1);
+    onPageChange(totalPageLength - 1);
+  };
+
+  const lastBlock = Math.ceil(totalPageLength / blockSize) - 1;
+  const currentBlock = Math.floor(currentPage / blockSize);
 
   return (
-    <div className={cls}>
+    <div {...props}>
+      {blockSize < totalPageLength && (
+        <button disabled={blockSize > currentPage} onClick={handleClickFirst}>
+          <NavigatorButtonFirstLast
+            height="16px"
+            stroke={
+              blockSize > currentPage ? "#cbd5e1" : "oklch(0.637 0.237 25.331)"
+            }
+          />
+        </button>
+      )}
       <button disabled={currentPage === 0} onClick={handleClickPrev}>
-        prev
+        <NavigatorButton
+          height="16px"
+          stroke={currentPage === 0 ? "#cbd5e1" : "oklch(0.637 0.237 25.331)"}
+        />
       </button>
+      {children}
       <button
         disabled={currentPage + 1 === totalPageLength}
         onClick={handleClickNext}
       >
-        next
+        <NavigatorButton
+          height="16px"
+          transform="rotate(180)"
+          stroke={
+            currentPage + 1 === totalPageLength
+              ? "#cbd5e1"
+              : "oklch(0.637 0.237 25.331)"
+          }
+        />
       </button>
+      {blockSize < totalPageLength && (
+        <button disabled={currentBlock === lastBlock} onClick={handleClickLast}>
+          <NavigatorButtonFirstLast
+            height="16px"
+            transform="rotate(180)"
+            stroke={
+              currentBlock === lastBlock
+                ? "#cbd5e1"
+                : "oklch(0.637 0.237 25.331)"
+            }
+          />
+        </button>
+      )}
     </div>
   );
 };

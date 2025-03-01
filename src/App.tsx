@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import {
   Tabs,
   Carousel,
@@ -10,8 +10,15 @@ import {
   Select,
   Accordion,
   Toaster,
+  CarouselInfinite,
 } from "./components";
 import ExamplePage from "./components/Progress/ExamplePage";
+import CarouselInfiniteItem from "@ui/CarouselInfinite/CarouselInfiniteItem";
+
+type SelectedItem = {
+  label: ReactNode;
+  value: string;
+};
 
 function App() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -46,6 +53,11 @@ function App() {
     setIsOpen(true);
   };
 
+  const [selectedItem, setSelectedItem] = useState<SelectedItem>({
+    label: "영화",
+    value: "movie",
+  });
+
   // Calculate items for the current page
   const startIdx = currentPage * pageSize;
   const endIdx = startIdx + pageSize;
@@ -69,8 +81,8 @@ function App() {
         <Tabs.Pannel index={2}>Content2</Tabs.Pannel>
         <Tabs.Pannel index={3}>Content3</Tabs.Pannel>
       </Tabs>
-
-      <Carousel itemLength={3}>
+      <h1>캐러샐</h1>
+      <Carousel>
         <Carousel.ItemList>
           <Carousel.Item index={0}></Carousel.Item>
           <Carousel.Item index={1}></Carousel.Item>
@@ -133,7 +145,7 @@ function App() {
         <Popover.Trigger>Open</Popover.Trigger>
         <Popover.Content>Place content for the popover here.</Popover.Content>
       </Popover> */}
-
+      <h1>모달</h1>
       <Modal
         onOpenModal={handleOpenModal}
         onCloseModal={handleCloseModal}
@@ -163,14 +175,21 @@ function App() {
 
       <DatePicker date={new Date()} onChangeDate={handleChangeDate} />
 
-      <Select onChange={handleChangeValue} value={selectedValue}>
+      <h1>셀렉트</h1>
+      <Select
+        onChange={handleChangeValue}
+        value={selectedValue}
+        item={selectedItem}
+        setItem={setSelectedItem}
+      >
         <Select.Trigger />
         <Select.Content>
-          <Select.Item value={"1"}>One</Select.Item>
-          <Select.Item value={"2"}>Two</Select.Item>
-          <Select.Item value={"3"}>Three</Select.Item>
+          <Select.Item value={"movie"}>영화</Select.Item>
+          <Select.Item value={"actor"}>배우</Select.Item>
         </Select.Content>
       </Select>
+
+      <h1>아코디언</h1>
       <Accordion>
         <Accordion.Item value="item-1">
           <Accordion.Trigger>item-1 trigger</Accordion.Trigger>
@@ -181,6 +200,20 @@ function App() {
           <Accordion.Content>item-2 Content.</Accordion.Content>
         </Accordion.Item>
       </Accordion>
+      <h1>무한캐러샐</h1>
+      <CarouselInfinite>
+        <CarouselInfinite.ItemContainer>
+          <CarouselInfinite.ItemList>
+            <CarouselInfiniteItem index={0}>
+              {() => <div>0</div>}
+            </CarouselInfiniteItem>
+            <CarouselInfiniteItem index={1}>
+              {() => <div>1</div>}
+            </CarouselInfiniteItem>
+          </CarouselInfinite.ItemList>
+        </CarouselInfinite.ItemContainer>
+        <CarouselInfinite.Navigator></CarouselInfinite.Navigator>
+      </CarouselInfinite>
 
       <ul>
         <li style={{ height: "100px" }}>content</li>

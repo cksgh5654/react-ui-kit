@@ -93,7 +93,7 @@
 #### 캐러셀 기본
 
 ```jsx
-<Carousel itemLength={3}>
+<Carousel>
   <Carousel.ItemList>
     <Carousel.Item index={0}></Carousel.Item>
     <Carousel.Item index={1}></Carousel.Item>
@@ -107,7 +107,7 @@
 #### 캐러셀 커스텀(내비게이터, 인디게이터)
 
 ```jsx
-<Carousel itemLength={3}>
+<Carousel>
   <Carousel.ItemList>
     <Carousel.Item index={0}></Carousel.Item>
     <Carousel.Item index={1}></Carousel.Item>
@@ -131,6 +131,145 @@
     }
   </Carousel.Indicator>
 </Carousel>
+```
+
+## **CarouselInfinite**
+
+### Source
+
+[src/components/CarouselInfinite / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/CarouselInfinite)
+
+### Children
+
+- Root
+- Item
+- ItemContainer
+- ItemList
+- ItemNavigator
+
+### Example
+
+```jsx
+<CarouselInfinite>
+  <CarouselInfinite.ItemContainer>
+    <CarouselInfinite.ItemList>
+      {items.map((item, index) => {
+        return (
+          <CarouselInfinite.Item index={index}>
+            {(carouselIndex) => <Component props={item} />}
+          </CarouselInfinite.Item>
+        );
+      })}
+    </CarouselInfinite.ItemList>
+  </CarouselInfinite.ItemContainer>
+  <CarouselInfinite.Navigator></CarouselInfinite.Navigator>
+</CarouselInfinite>
+```
+
+## **CarouselXscroll**
+
+### Source
+
+[src/components/CarouselXscroll / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/CarouselXscroll)
+
+### Children
+
+- Root
+- ItemContainer
+- Items
+- Navigator
+
+### Example
+
+#### 캐러셀 좌우 스크롤 기본
+
+```jsx
+const MainPage = () => {
+  const baseRef = useRef < HTMLDivElement > null;
+  const itemListRef = useRef < HTMLDivElement > null;
+  const [baseRect, setBaseRect] = useState(new DOMRect());
+
+  const calculateBaseDivRect = () => {
+    if (!baseRef.current) return;
+    setBaseRect(baseRef.current.getBoundingClientRect());
+  };
+
+  useEffect(() => {
+    calculateBaseDivRect();
+
+    const handleResize = () => {
+      calculateBaseDivRect();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <>
+      <div ref={baseRef} className="font-extrabold text-6xl">
+        이 div에 왼쪽에 맞춰서 첫번째 아이템이 정렬이 됩니다.
+      </div>
+      <CarouselXscroll
+        baseRect={baseRect}
+        pixelMove={200}
+        itemListRef={itemListRef}
+      >
+        <CarouselXscroll.ItemContainer className="h-52">
+          <CarouselXscroll.Items>
+            <div className="w-52 h-52 bg-red-200">1</div>
+            <div className="w-52 h-52 bg-red-200">2</div>
+            <div className="w-52 h-52 bg-red-200">3</div>
+            <div className="w-52 h-52 bg-red-200">4</div>
+            <div className="w-52 h-52 bg-red-200">5</div>
+            <div className="w-52 h-52 bg-red-200">6</div>
+            <div className="w-52 h-52 bg-red-200">7</div>
+            <div className="w-52 h-52 bg-red-200">8</div>
+            <div className="w-52 h-52 bg-red-200">9</div>
+            <div className="w-52 h-52 bg-red-200">10</div>
+          </CarouselXscroll.Items>
+        </CarouselXscroll.ItemContainer>
+        <CarouselXscroll.Navigator />
+      </CarouselXscroll>
+    </>
+  );
+};
+```
+
+#### 캐러셀 좌우 스크롤 커스텀(내비게이터)
+
+```jsx
+<CarouselXscroll baseRect={baseRect} itemWidth={200} itemListRef={itemListRef}>
+  <CarouselXscroll.ItemContainer className="h-52">
+    <CarouselXscroll.Items>
+      <div className="w-52 h-52 bg-red-200">1</div>
+      <div className="w-52 h-52 bg-red-200">2</div>
+      <div className="w-52 h-52 bg-red-200">3</div>
+      <div className="w-52 h-52 bg-red-200">4</div>
+      <div className="w-52 h-52 bg-red-200">5</div>
+      <div className="w-52 h-52 bg-red-200">6</div>
+      <div className="w-52 h-52 bg-red-200">7</div>
+      <div className="w-52 h-52 bg-red-200">8</div>
+      <div className="w-52 h-52 bg-red-200">9</div>
+      <div className="w-52 h-52 bg-red-200">10</div>
+    </CarouselXscroll.Items>
+  </CarouselXscroll.ItemContainer>
+  <CarouselXscroll.Navigator>
+    {(prev, next, leftStyle, rightStyle) => (
+      <>
+        <span style={leftStyle} onClick={prev}>
+          이전
+        </span>
+        <span style={rightStyle} onClick={next}>
+          다음
+        </span>
+      </>
+    )}
+  </CarouselXscroll.Navigator>
+</CarouselXscroll>
 ```
 
 ## **DatePicker**
@@ -266,7 +405,12 @@
 ### Example
 
 ```jsx
-<Select onChange={handleChangeValue} value={selectedValue}>
+<Select
+  onChange={handleChangeValue}
+  value={selectedValue}
+  item={selectedItem}
+  setItem={setSelectedItem}
+>
   <Select.Trigger />
   <Select.Content>
     <Select.Item value={"1"}>One</Select.Item>
