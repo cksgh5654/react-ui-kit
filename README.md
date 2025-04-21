@@ -74,65 +74,6 @@
 </Calendar>
 ```
 
-## **Carousel**
-
-### Source
-
-[src/components/Carousel / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Carousel)
-
-### Children
-
-- Root
-- ItemList
-- Item
-- Navigator
-- Indicator
-
-### Example
-
-#### 캐러셀 기본
-
-```jsx
-<Carousel>
-  <Carousel.ItemList>
-    <Carousel.Item index={0}></Carousel.Item>
-    <Carousel.Item index={1}></Carousel.Item>
-    <Carousel.Item index={2}></Carousel.Item>
-  </Carousel.ItemList>
-  <Carousel.Navigator />
-  <Carousel.Indicator />
-</Carousel>
-```
-
-#### 캐러셀 커스텀(내비게이터, 인디게이터)
-
-```jsx
-<Carousel>
-  <Carousel.ItemList>
-    <Carousel.Item index={0}></Carousel.Item>
-    <Carousel.Item index={1}></Carousel.Item>
-    <Carousel.Item index={2}></Carousel.Item>
-  </Carousel.ItemList>
-  <Carousel.Navigator>
-    {(prev, next) => (
-      <div>
-        <span onClick={prev}>이전</span>
-        <span onClick={next}>다음</span>
-      </div>
-    )}
-  </Carousel.Navigator>
-  <Carousel.Indicator>
-    {(indexes, to) =>
-      indexes.map((index) => (
-        <span key={index} onClick={() => to(index)}>
-          {index + 1}
-        </span>
-      ))
-    }
-  </Carousel.Indicator>
-</Carousel>
-```
-
 ## **CarouselInfinite**
 
 ### Source
@@ -162,7 +103,50 @@
       })}
     </CarouselInfinite.ItemList>
   </CarouselInfinite.ItemContainer>
-  <CarouselInfinite.Navigator></CarouselInfinite.Navigator>
+  <CarouselInfinite.Navigator />
+
+  <CarouselInfinite.Indicator
+    styleType="dots"
+    dotSize={16}
+    activeColor="oklch(62.3% 0.214 259.815)"
+  />
+</CarouselInfinite>
+```
+
+### 네비게이터 커스텀
+
+```jsx
+<CarouselInfinite>
+  <CarouselInfinite.ItemContainer>
+    <CarouselInfinite.ItemList>
+      {items.map((item, index) => {
+        return (
+          <CarouselInfinite.Item index={index}>
+            {(carouselIndex) => <Component props={item} />}
+          </CarouselInfinite.Item>
+        );
+      })}
+    </CarouselInfinite.ItemList>
+  </CarouselInfinite.ItemContainer>
+
+  <CarouselInfinite.Navigator>
+    {(handlePrev, handleNext, isTransitioning) => (
+      <div>
+        <button onClick={handlePrev} disabled={isTransitioning}>
+          <ChevronIcon />
+        </button>
+        <button onClick={handleNext} disabled={isTransitioning}>
+          <ChevronIcon />
+        </button>
+      </div>
+    )}
+  </CarouselInfinite.Navigator>
+
+  <CarouselInfinite.Indicator
+    styleType="dots"
+    dotSize={16}
+    activeColor="oklch(62.3% 0.214 259.815)"
+  />
 </CarouselInfinite>
 ```
 
@@ -272,22 +256,6 @@ const MainPage = () => {
 </CarouselXscroll>
 ```
 
-## **DatePicker**
-
-### Source
-
-[src/components/DatePicker / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/DatePicker)
-
-### Children
-
-- Root
-
-### Example
-
-```jsx
-<DatePicker date={new Date()} onChangeDate={handleChangeDate} />
-```
-
 ## **Modal**
 
 ### Source
@@ -371,22 +339,6 @@ const MainPage = () => {
   <Popover.Trigger>Open</Popover.Trigger>
   <Popover.Content>Place content for the popover here.</Popover.Content>
 </Popover>
-```
-
-## **Progress**
-
-### Source
-
-[src/components/Progress / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Progress)
-
-### Children
-
-- Root
-
-### Example
-
-```jsx
-<Progress stop={stop} />
 ```
 
 ## **Select**
