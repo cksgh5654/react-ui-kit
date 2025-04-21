@@ -10,22 +10,17 @@ export const tabsMenuListBaseCls = getBaseCls("tabs-menu-list");
 export const tabsMenuBaseCls = getBaseCls("tabs-menu");
 export const tabsPannelBaseCls = getBaseCls("tabs-pannel");
 
-// Carousel Component
-export const carouselBaseCls = getBaseCls("carousel");
-export const carouselItemListCls = getBaseCls("carousel-item-list");
-export const carouselItemCls = getBaseCls("carousel-item");
-export const carouselNavigatorCls = getBaseCls("carousel-navigator");
-export const carouselIndicatorCls = getBaseCls("carousel-indicator");
-
 // Calendar Component
 export const calendarBaseCls = getBaseCls("calendar");
 export const calendarBodyCls = getBaseCls("calendar-body");
 export const calendarCurrentCls = getBaseCls("calendar-current");
 export const calendarNavigatorCls = getBaseCls("calendar-navigator");
+export const calendarDateCellCls = getBaseCls("calendar-date-cell");
 
 // Carousel Component
 export const breadcrumbBaseCls = getBaseCls("breadcrumb");
 export const breadcrumbItemCls = getBaseCls("breadcrumb-item");
+export const breadcrumbDropdownCls = getBaseCls("breadcrumb-dropdown");
 
 // carouselInfinite Component
 export const carouselInfiniteBaseCls = getBaseCls("carousel-infinite");
@@ -36,6 +31,9 @@ export const carouselInfiniteItemListCls = getBaseCls("carousel-infinite-list");
 export const carouselInfiniteItemCls = getBaseCls("carousel-infinite-item");
 export const carouselInfiniteNavigatorCls = getBaseCls(
   "carousel-infinite-navigator"
+);
+export const carouselInfiniteIndicatorCls = getBaseCls(
+  "carousel-infinite-indicator"
 );
 
 // CarouselXscroll Component
@@ -67,9 +65,6 @@ export const modalBackdropCls = getBaseCls("modal-backdrop");
 export const modalTriggerCls = getBaseCls("modal-trigger");
 export const modalContentCls = getBaseCls("modal-content");
 export const modalCloseCls = getBaseCls("modal-close");
-
-// DatePicker Component
-export const datePickerBaseCls = getBaseCls("datePicker");
 
 // DatePicker Component
 export const selectBaseCls = getBaseCls("select");

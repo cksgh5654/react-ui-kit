@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode, useContext } from "react";
 import { CarouselXscrollContext } from ".";
+import ChevronIcon from "@ui/icon/ChevronIcon";
 
 interface CarouselXscrollNavigatorProps {
   children?: (
@@ -12,7 +13,7 @@ interface CarouselXscrollNavigatorProps {
 
 const CarouselXscrollNavigator = (props: CarouselXscrollNavigatorProps) => {
   const { children } = props;
-  const { itemListRef, scrollPosition, pixelMove } = useContext(
+  const { itemListRef, scrollPosition, pixelMove, chevronColor } = useContext(
     CarouselXscrollContext
   );
 
@@ -71,10 +72,16 @@ const CarouselXscrollNavigator = (props: CarouselXscrollNavigatorProps) => {
       ) : (
         <>
           <button style={leftButtonStyle} onClick={handleLeft}>
-            &lt;
+            <ChevronIcon
+              color={chevronColor}
+              style={{ rotate: "180deg", width: "32px" }}
+            />
           </button>
           <button style={rightButtonStyle} onClick={handleRight}>
-            &gt;
+            <ChevronIcon
+              color={chevronColor}
+              style={{ rotate: "180deg", width: "32px" }}
+            />
           </button>
         </>
       )}

@@ -1,16 +1,17 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import {
   Tabs,
-  Carousel,
   Breadcrumb,
   Pagination,
   Calendar,
   Modal,
-  DatePicker,
   Select,
   Accordion,
   Toaster,
   CarouselInfinite,
+  useToast,
+  CarouselXscroll,
+  Popover,
 } from "./components";
 import ExamplePage from "./components/Progress/ExamplePage";
 import CarouselInfiniteItem from "@ui/CarouselInfinite/CarouselInfiniteItem";
@@ -22,11 +23,48 @@ type SelectedItem = {
 
 function App() {
   const [currentPage, setCurrentPage] = useState(0);
+  const [baseRect, setBaseRect] = useState(new DOMRect());
+  const [modalRect, setModalRect] = useState(new DOMRect());
+  const itemListRef = useRef<HTMLDivElement>(null);
+  const baseRef = useRef<HTMLHeadingElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const { toast } = useToast();
   const totalItems = 400;
   const pageSize = 10;
 
+  const calculateBaseDivRect = () => {
+    if (!baseRef.current) return;
+    setBaseRect(baseRef.current.getBoundingClientRect());
+    if (modalRef.current) {
+      setModalRect(modalRef.current.getBoundingClientRect());
+    }
+  };
+
+  useEffect(() => {
+    calculateBaseDivRect();
+
+    const handleResize = () => {
+      calculateBaseDivRect();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const handleChangeTab = (index: number) => {
     console.log(`Tab changed to index: ${index}`);
+  };
+
+  const handleClickOpenToast = () => {
+    toast({
+      title: "ToastTitle",
+      description: "ToastDescription",
+      duration: 5000,
+    });
   };
 
   const handleChangeDate = (index: Date) => {
@@ -82,45 +120,21 @@ function App() {
         <Tabs.Pannel index={3}>Content3</Tabs.Pannel>
       </Tabs>
       <h1>캐러샐</h1>
-      <Carousel>
-        <Carousel.ItemList>
-          <Carousel.Item index={0}></Carousel.Item>
-          <Carousel.Item index={1}></Carousel.Item>
-          <Carousel.Item index={2}></Carousel.Item>
-        </Carousel.ItemList>
-        <Carousel.Navigator>
-          {(prev, next) => (
-            <div>
-              <span onClick={prev}>이전</span>
-              <span onClick={next}>다음</span>
-            </div>
-          )}
-        </Carousel.Navigator>
-        <Carousel.Indicator>
-          {(indexes, to) =>
-            indexes.map((index) => (
-              <span key={index} onClick={() => to(index)}>
-                {index + 1}
-              </span>
-            ))
-          }
-        </Carousel.Indicator>
-      </Carousel>
-
-      <Calendar onChange={handleChangeDate} value={new Date()}>
+      <Calendar
+        chevronColor="#fff"
+        onChange={handleChangeDate}
+        value={new Date()}
+      >
         <Calendar.Current />
         <Calendar.Navigator />
         <Calendar.Body />
       </Calendar>
-
-      <Breadcrumb width="100px">
+      <Breadcrumb chevronColor="#fff" width="100px">
         <Breadcrumb.Item href="/a">1</Breadcrumb.Item>
         <Breadcrumb.Item href="/a-a">2</Breadcrumb.Item>
         <Breadcrumb.Item href="/a-a-a">3</Breadcrumb.Item>
         <Breadcrumb.Item href="/a-a-a-a">4</Breadcrumb.Item>
-        <Breadcrumb.Item href="/a-a-a-a-a">5</Breadcrumb.Item>
       </Breadcrumb>
-
       <Pagination
         total={totalItems}
         value={currentPage}
@@ -131,7 +145,6 @@ function App() {
         <Pagination.Buttons />
         <Pagination.Navigator />
       </Pagination>
-
       <div>
         <h2>Current Page Items:</h2>
         <ul>
@@ -140,12 +153,11 @@ function App() {
           ))}
         </ul>
       </div>
-
       {/* <Popover position="bottom-left">
         <Popover.Trigger>Open</Popover.Trigger>
         <Popover.Content>Place content for the popover here.</Popover.Content>
       </Popover> */}
-      <h1>모달</h1>
+      <h1 ref={modalRef}>모달</h1>
       <Modal
         onOpenModal={handleOpenModal}
         onCloseModal={handleCloseModal}
@@ -166,15 +178,20 @@ function App() {
             <Modal.Close>
               <button>닫기</button>
             </Modal.Close>
-            <div>Modal Content</div>
+            <Popover position="bottom-left">
+              <Popover.Trigger>Open</Popover.Trigger>
+              <Popover.Content>
+                Place content for the popover here.
+              </Popover.Content>
+            </Popover>
           </div>
         </Modal.Content>
-      </Modal>
-
+      </Modal>{" "}
+      <Popover position="bottom-left">
+        <Popover.Trigger>Open</Popover.Trigger>
+        <Popover.Content>Place content for the popover here.</Popover.Content>
+      </Popover>
       <ExamplePage />
-
-      <DatePicker date={new Date()} onChangeDate={handleChangeDate} />
-
       <h1>셀렉트</h1>
       <Select
         onChange={handleChangeValue}
@@ -188,11 +205,10 @@ function App() {
           <Select.Item value={"actor"}>배우</Select.Item>
         </Select.Content>
       </Select>
-
       <h1>아코디언</h1>
-      <Accordion>
+      <Accordion chevronColor="#fff">
         <Accordion.Item value="item-1">
-          <Accordion.Trigger>item-1 trigger</Accordion.Trigger>
+          <Accordion.Trigger chevron>item-1 trigger</Accordion.Trigger>
           <Accordion.Content>item-1 Content.</Accordion.Content>
         </Accordion.Item>
         <Accordion.Item value="item-2">
@@ -201,7 +217,7 @@ function App() {
         </Accordion.Item>
       </Accordion>
       <h1>무한캐러샐</h1>
-      <CarouselInfinite>
+      <CarouselInfinite chevronColor="#fff">
         <CarouselInfinite.ItemContainer>
           <CarouselInfinite.ItemList>
             <CarouselInfiniteItem index={0}>
@@ -210,11 +226,51 @@ function App() {
             <CarouselInfiniteItem index={1}>
               {() => <div>1</div>}
             </CarouselInfiniteItem>
+            <CarouselInfiniteItem index={2}>
+              {() => <div>1</div>}
+            </CarouselInfiniteItem>
           </CarouselInfinite.ItemList>
         </CarouselInfinite.ItemContainer>
-        <CarouselInfinite.Navigator></CarouselInfinite.Navigator>
+        <CarouselInfinite.Navigator />
+        <CarouselInfinite.Indicator
+          activeColor="red"
+          styleType="dots"
+          dotSize={20}
+        />
       </CarouselInfinite>
-
+      <CarouselXscroll
+        chevronColor="#fff"
+        baseRect={baseRect}
+        pixelMove={modalRect.width}
+        itemListRef={itemListRef}
+        className="group"
+      >
+        <CarouselXscroll.ItemContainer className="h-full">
+          <CarouselXscroll.Items className="flex gap-4">
+            <div className="bg-blue-400 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
+              1
+            </div>
+            <div className="bg-blue-500 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
+              2
+            </div>
+            <div className="bg-blue-600 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
+              3
+            </div>
+            <div className="bg-blue-700 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
+              4
+            </div>
+            <div className="bg-blue-800 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
+              5
+            </div>
+            <div className="bg-blue-900 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
+              6
+            </div>
+          </CarouselXscroll.Items>
+        </CarouselXscroll.ItemContainer>
+        <CarouselXscroll.Navigator />
+      </CarouselXscroll>
+      <h1>토스트</h1>
+      <button onClick={handleClickOpenToast}>open toast</button>;
       <ul>
         <li style={{ height: "100px" }}>content</li>
         <li style={{ height: "100px" }}>content</li>

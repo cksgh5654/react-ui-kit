@@ -1,6 +1,7 @@
 import { toastBaseCls } from "@consts/className";
 import { CSSProperties, useEffect, useMemo, useRef } from "react";
 import { createRoot, Root } from "react-dom/client";
+import { createPortal } from "react-dom";
 import ToastContent from "./ToastContent";
 import ToastTitle from "./ToastTitle";
 import ToastDescription from "./ToastDescription";
@@ -23,31 +24,46 @@ interface ToasterProps {
   className?: string;
   position?: ToasterPositions;
 }
-
 export const useToast = () => {
   const timeoutRef = useRef<number | null>(null);
   const rootRef = useRef<Root | null>(null);
+  const domNodeRef = useRef<HTMLElement | null>(null);
 
-  const toast = ({ title, description, duration = 2000 }: ToastProps) => {
-    const domNode = document.getElementById("ui-toaster");
+  const toast = (
+    { title, description, duration = 2000 }: ToastProps,
+    toasterProps: ToasterProps = { position: "bottom-right" }
+  ) => {
+    if (!domNodeRef.current) {
+      domNodeRef.current = document.createElement("div");
+      domNodeRef.current.id = "ui-toaster";
+      document.body.appendChild(domNodeRef.current);
+    }
 
-    if (domNode) {
-      if (!rootRef.current) rootRef.current = createRoot(domNode);
+    if (domNodeRef.current) {
+      if (!rootRef.current) rootRef.current = createRoot(domNodeRef.current);
 
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
       rootRef.current.render(
-        <ToastContent>
-          <ToastTitle title={title} />
-          <ToastDescription description={description} />
-        </ToastContent>
+        createPortal(
+          <Toaster {...toasterProps}>
+            <ToastContent>
+              <ToastTitle title={title} />
+              <ToastDescription description={description} />
+            </ToastContent>
+          </Toaster>,
+          domNodeRef.current
+        )
       );
 
       timeoutRef.current = window.setTimeout(() => {
         rootRef.current?.unmount();
         rootRef.current = null;
         timeoutRef.current = null;
-        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        if (domNodeRef.current && domNodeRef.current.parentNode) {
+          domNodeRef.current.parentNode.removeChild(domNodeRef.current);
+          domNodeRef.current = null;
+        }
       }, duration);
     }
   };
@@ -57,15 +73,24 @@ export const useToast = () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
+      if (rootRef.current) {
+        rootRef.current.unmount();
+        rootRef.current = null;
+      }
+      if (domNodeRef.current && domNodeRef.current.parentNode) {
+        domNodeRef.current.parentNode.removeChild(domNodeRef.current);
+        domNodeRef.current = null;
+      }
     };
   }, []);
 
   return { toast };
 };
-
-export const Toaster = (props: ToasterProps) => {
-  const { className, position = "bottom-right" } = props;
-
+export const Toaster = ({
+  className,
+  position = "bottom-right",
+  children,
+}: ToasterProps & { children?: React.ReactNode }) => {
   const mapPositionToStyle: {
     [key in ToasterPositions]: Partial<
       Pick<
@@ -74,22 +99,22 @@ export const Toaster = (props: ToasterProps) => {
       >
     >;
   } = {
-    "bottom-left": { position: "fixed", bottom: "0px", left: "0px" },
+    "bottom-left": { position: "fixed", bottom: "20px", left: "20px" },
     "bottom-center": {
       position: "fixed",
-      bottom: "0px",
+      bottom: "20px",
       left: "50%",
       transform: "translateX(-50%)",
     },
-    "bottom-right": { position: "fixed", bottom: "0px", right: "0px" },
-    "top-left": { position: "fixed" },
+    "bottom-right": { position: "fixed", bottom: "20px", right: "20px" },
+    "top-left": { position: "fixed", top: "20px", left: "20px" },
     "top-center": {
       position: "fixed",
-      top: "0px",
+      top: "20px",
       left: "50%",
       transform: "translateX(-50%)",
     },
-    "top-right": { position: "fixed", top: "0px", right: "0px" },
+    "top-right": { position: "fixed", top: "20px", right: "20px" },
   };
 
   const cls = useMemo(
@@ -100,8 +125,9 @@ export const Toaster = (props: ToasterProps) => {
   return (
     <div
       className={cls}
-      style={mapPositionToStyle[position]}
-      id={"ui-toaster"}
-    />
+      style={{ ...mapPositionToStyle[position], zIndex: 9999 }}
+    >
+      {children}
+    </div>
   );
 };

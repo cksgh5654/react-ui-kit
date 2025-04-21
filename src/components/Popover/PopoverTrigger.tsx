@@ -1,15 +1,17 @@
 import { ReactNode, useContext, useEffect, useMemo, useRef } from "react";
 import { PopoverContext } from ".";
 import { popoverTriggerCls } from "@consts/className";
-import ChevronIcon from "./icon/ChevronIcon";
+import ChevronIcon from "@ui/icon/ChevronIcon";
 
 interface PopoverTriggerProps {
   className?: string;
   children?: ReactNode;
+  chevronColor?: string;
 }
 
 const PopoverTrigger = (props: PopoverTriggerProps) => {
-  const { setTriggerRect, isOpen, setIsOpen } = useContext(PopoverContext);
+  const { setTriggerRect, isOpen, setIsOpen, chevronColor } =
+    useContext(PopoverContext);
   const { className, children } = props;
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -45,6 +47,7 @@ const PopoverTrigger = (props: PopoverTriggerProps) => {
         {children ? children : "Open"}
       </button>
       <ChevronIcon
+        color={chevronColor}
         style={{
           width: "24px",
           transition: "transform 0.3s ease",

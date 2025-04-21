@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode, useContext } from "react";
 import { PaginationContext } from ".";
-import NavigatorButton from "./icons/NavigatorButton";
-import NavigatorButtonFirstLast from "./icons/NavigatorButtonFirstLast";
+import NavigatorButton from "@ui/icon/NavigatorButton";
+import NavigatorButtonFirstLast from "@ui/icon/NavigatorButtonFirstLast";
 
 interface PaginationNavigatorProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
@@ -14,6 +14,7 @@ const PaginationNavigator = (props: PaginationNavigatorProps) => {
     onPageChange,
     totalPageLength,
     blockSize,
+    color,
   } = useContext(PaginationContext);
 
   const { children } = props;
@@ -51,16 +52,14 @@ const PaginationNavigator = (props: PaginationNavigatorProps) => {
         <button disabled={blockSize > currentPage} onClick={handleClickFirst}>
           <NavigatorButtonFirstLast
             height="16px"
-            stroke={
-              blockSize > currentPage ? "#cbd5e1" : "oklch(0.637 0.237 25.331)"
-            }
+            stroke={blockSize > currentPage ? "#cbd5e1" : color}
           />
         </button>
       )}
       <button disabled={currentPage === 0} onClick={handleClickPrev}>
         <NavigatorButton
           height="16px"
-          stroke={currentPage === 0 ? "#cbd5e1" : "oklch(0.637 0.237 25.331)"}
+          stroke={currentPage === 0 ? "#cbd5e1" : color}
         />
       </button>
       {children}
@@ -71,11 +70,7 @@ const PaginationNavigator = (props: PaginationNavigatorProps) => {
         <NavigatorButton
           height="16px"
           transform="rotate(180)"
-          stroke={
-            currentPage + 1 === totalPageLength
-              ? "#cbd5e1"
-              : "oklch(0.637 0.237 25.331)"
-          }
+          stroke={currentPage + 1 === totalPageLength ? "#cbd5e1" : color}
         />
       </button>
       {blockSize < totalPageLength && (
@@ -83,11 +78,7 @@ const PaginationNavigator = (props: PaginationNavigatorProps) => {
           <NavigatorButtonFirstLast
             height="16px"
             transform="rotate(180)"
-            stroke={
-              currentBlock === lastBlock
-                ? "#cbd5e1"
-                : "oklch(0.637 0.237 25.331)"
-            }
+            stroke={currentBlock === lastBlock ? "#cbd5e1" : color}
           />
         </button>
       )}

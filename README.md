@@ -464,21 +464,17 @@ const MainPage = () => {
 const ExamplePage = () => {
   const { toast } = useToast();
   const handleClickOpenToast = () => {
-    toast({
-      title: "ToastTitle",
-      description: "ToastDescription",
-      duration: 5000,
-    });
+    toast(
+      {
+        title: "ToastTitle",
+        description: "ToastDescription",
+        duration: 5000,
+      },
+      {
+        position: "top-center",
+      }
+    );
   };
   return <button onClick={handleClickOpenToast}>open toast</button>;
 };
-
-function App() {
-  return (
-    <>
-      <ExamplePage />
-      <Toaster position="top-center" />
-    </>
-  );
-}
 ```

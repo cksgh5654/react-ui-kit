@@ -22,12 +22,14 @@ interface CalendarContextProps {
   date: Date;
   setDate: Dispatch<SetStateAction<Date>>;
   onChange: (date: Date) => void;
+  chevronColor?: string;
 }
 
 export const CalendarContext = createContext<CalendarContextProps>({
   date: new Date(),
   setDate: () => {},
   onChange: () => {},
+  chevronColor: "#000000",
 });
 
 interface CalendarProps {
@@ -35,13 +37,14 @@ interface CalendarProps {
   className?: string;
   onChange: (date: Date) => void;
   value: Date;
+  chevronColor?: string;
 }
 
 const Calendar: FC<CalendarProps> & CalendarCompoundProps = (props) => {
-  const { children, className, onChange, value } = props;
+  const { children, className, onChange, value, chevronColor } = props;
   const [date, setDate] = useState<Date>(value);
 
-  const contextValue = { date, setDate, onChange };
+  const contextValue = { date, setDate, onChange, chevronColor };
 
   const cls = useMemo(
     () => (className ? `${className} ${calendarBaseCls}` : calendarBaseCls),

@@ -12,6 +12,8 @@ import {
 } from "react";
 import BreadcrumbItem from "./BreadcrumbItem";
 import { breadcrumbBaseCls } from "@consts/className";
+import BreadcrumbDropdown from "./BreadcrumbDropdown";
+import ChevronIcon from "@ui/icon/ChevronIcon";
 
 interface BreadcrumbCompoundProps {
   Item: typeof BreadcrumbItem;
@@ -21,6 +23,7 @@ interface BreadcrumbProps {
   width?: string;
   children: ReactNode;
   className?: string;
+  chevronColor?: string;
 }
 
 interface BreadcrumbContextProps {
@@ -33,36 +36,49 @@ export const BreadcrumbContext = createContext<BreadcrumbContextProps>({
   setTotalWidth: () => {},
 });
 
-const Breadcrumb: FC<BreadcrumbProps> & BreadcrumbCompoundProps = (props) => {
-  const { width = "500px", children, className } = props;
+const Breadcrumb: FC<BreadcrumbProps> & BreadcrumbCompoundProps = ({
+  width = "500px",
+  children,
+  className,
+  chevronColor,
+}) => {
   const [totalWidth, setTotalWidth] = useState(0);
   const [isSpillOver, setIsSpillOver] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const seperatorRef = useRef<HTMLSpanElement>(null);
-
-  const cls = useMemo(
-    () => (className ? `${className} ${breadcrumbBaseCls}` : breadcrumbBaseCls),
-    []
-  );
-
-  const contextValue = {
-    totalWidth,
-    setTotalWidth,
-  };
-
-  const items = Children.toArray(children).map((item, index, arr) => {
-    return (
-      <span key={index}>
-        {item}
-        {index < arr.length - 1 && <span ref={seperatorRef}>&gt;</span>}
-      </span>
-    );
-  });
+  const seperatorRef = useRef<SVGSVGElement>(null);
+  const toggleRef = useRef<HTMLSpanElement>(null);
 
   const childArray = Children.toArray(children);
   const firstItem = childArray[0];
   const lastItem = childArray[childArray.length - 1];
   const middleItems = childArray.slice(1, -1);
+
+  const contextValue = { totalWidth, setTotalWidth };
+
+  const cls = useMemo(
+    () => (className ? `${className} ${breadcrumbBaseCls}` : breadcrumbBaseCls),
+    [className]
+  );
+
+  const items = childArray.map((item, index) => (
+    <span
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      key={index}
+    >
+      {item}
+      {index < childArray.length - 1 && (
+        <ChevronIcon
+          color={chevronColor}
+          ref={seperatorRef}
+          style={{ rotate: "180deg", width: "32px" }}
+        />
+      )}
+    </span>
+  ));
 
   useEffect(() => {
     setTotalWidth(
@@ -73,41 +89,53 @@ const Breadcrumb: FC<BreadcrumbProps> & BreadcrumbCompoundProps = (props) => {
 
   useEffect(() => {
     const widthNumber = parseInt(width, 10);
-    if (totalWidth > widthNumber) {
-      setIsSpillOver(true);
-    } else {
-      setIsSpillOver(false);
-    }
+    setIsSpillOver(totalWidth > widthNumber);
   }, [totalWidth, width]);
 
   return (
     <BreadcrumbContext.Provider value={contextValue}>
-      <div style={{ width: width }} className={cls}>
+      <div
+        style={{
+          width,
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+        }}
+        className={cls}
+      >
         {isSpillOver ? (
           <>
             <span>{firstItem}</span>
-            <span>&gt;</span>
+            <ChevronIcon
+              color={chevronColor}
+              style={{ rotate: "180deg", width: "32px" }}
+            />
             <span
-              onClick={() => {
-                setIsDropdownOpen(!isDropdownOpen);
-              }}
+              ref={toggleRef}
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
             >
               ...
             </span>
-            <span>&gt;</span>
+            <ChevronIcon
+              color={chevronColor}
+              style={{ rotate: "180deg", width: "32px" }}
+            />
             <span>{lastItem}</span>
           </>
         ) : (
           items
         )}
+        {isDropdownOpen && (
+          <BreadcrumbDropdown
+            onClose={() => setIsDropdownOpen(false)}
+            anchorRef={toggleRef as React.RefObject<HTMLElement>}
+          >
+            {middleItems.map((item, index) => (
+              <div key={index}>{item}</div>
+            ))}
+          </BreadcrumbDropdown>
+        )}
       </div>
-      {isDropdownOpen && (
-        <div>
-          {middleItems.map((item, index) => {
-            return <div key={index}>{item}</div>;
-          })}
-        </div>
-      )}
     </BreadcrumbContext.Provider>
   );
 };

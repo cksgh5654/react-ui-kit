@@ -1,14 +1,16 @@
-import { useContext, useMemo } from "react";
+import { ReactNode, useContext, useMemo } from "react";
 import { CalendarContext } from ".";
 import { calendarNavigatorCls } from "@consts/className";
+import ChevronIcon from "@ui/icon/ChevronIcon";
 
 interface CalendarNavigatorProps {
   className?: string;
+  children?: ReactNode;
 }
 
 const CalendarNavigator = (props: CalendarNavigatorProps) => {
-  const { date, setDate, onChange } = useContext(CalendarContext);
-  const { className } = props;
+  const { date, setDate, onChange, chevronColor } = useContext(CalendarContext);
+  const { className, children } = props;
 
   const handlePrev = () => {
     const currentDate = new Date(date);
@@ -32,8 +34,16 @@ const CalendarNavigator = (props: CalendarNavigatorProps) => {
 
   return (
     <div className={cls}>
-      <button onClick={handlePrev}>&lt;</button>
-      <button onClick={handleNext}>&gt;</button>
+      <button onClick={handlePrev}>
+        <ChevronIcon color={chevronColor} width={"32px"} />
+      </button>
+      {children}
+      <button onClick={handleNext}>
+        <ChevronIcon
+          color={chevronColor}
+          style={{ rotate: "180deg", width: "32px" }}
+        />
+      </button>
     </div>
   );
 };

@@ -25,6 +25,7 @@ interface PopoverContextProps {
   openPopover: () => void;
   closePopover: () => void;
   fixed?: boolean;
+  chevronColor?: string;
 }
 
 export const PopoverContext = createContext<PopoverContextProps>({
@@ -36,6 +37,7 @@ export const PopoverContext = createContext<PopoverContextProps>({
   openPopover: () => {},
   closePopover: () => {},
   fixed: false,
+  chevronColor: "#000000",
 });
 
 interface PopoverProps {
@@ -43,10 +45,17 @@ interface PopoverProps {
   className?: string;
   position?: "bottom-left" | "bottom-center" | "bottom-right";
   fixed?: boolean;
+  chevronColor?: string;
 }
 
 const Popover: FC<PopoverProps> & PopoverCompoundProps = (props) => {
-  const { children, className, position = "bottom-left", fixed } = props;
+  const {
+    children,
+    className,
+    position = "bottom-left",
+    fixed,
+    chevronColor,
+  } = props;
   const [triggerRect, setTriggerRect] = useState(new DOMRect());
   const [isOpen, setIsOpen] = useState(false);
 
@@ -62,6 +71,7 @@ const Popover: FC<PopoverProps> & PopoverCompoundProps = (props) => {
     openPopover,
     closePopover,
     fixed,
+    chevronColor,
   };
 
   const cls = useMemo(

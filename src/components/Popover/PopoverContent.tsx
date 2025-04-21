@@ -27,7 +27,6 @@ const PopoverContent = (props: PopoverContentProps) => {
       e.stopPropagation();
     }
   };
-
   useEffect(() => {
     if (isOpen) {
       document.addEventListener("click", handleClickOutside, { capture: true });
@@ -101,7 +100,7 @@ const PopoverContent = (props: PopoverContentProps) => {
         createPortal(
           <div
             id="my-popover"
-            style={getContentPosition()}
+            style={{ ...getContentPosition(), zIndex: 9999 }}
             ref={contentRef}
             className={cls}
           >

@@ -4,7 +4,7 @@ import { PaginationContext } from ".";
 interface PaginationButtonsProps extends HTMLAttributes<HTMLDivElement> {}
 
 const PaginationButtons = (props: PaginationButtonsProps) => {
-  const { pages, currentPage, setCurrentPage, onPageChange } =
+  const { pages, currentPage, setCurrentPage, onPageChange, color } =
     useContext(PaginationContext);
 
   const handleChangePageIndex = (index: number) => {
@@ -20,10 +20,7 @@ const PaginationButtons = (props: PaginationButtonsProps) => {
           onClick={() => handleChangePageIndex(pageIndex)}
           disabled={currentPage === pageIndex}
           style={{
-            color:
-              currentPage === pageIndex
-                ? "oklch(0.637 0.237 25.331)"
-                : "#CBD5E1",
+            color: currentPage === pageIndex ? color : "#CBD5E1",
           }}
         >
           {pageIndex + 1}

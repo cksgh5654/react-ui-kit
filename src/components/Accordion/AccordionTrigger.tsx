@@ -2,15 +2,17 @@ import { accordionTriggerCls } from "@consts/className";
 import { ReactNode, useContext, useMemo } from "react";
 import { AccordionContext } from ".";
 import { AccordionItemContext } from "./AccordionItem";
+import ChevronIcon from "@ui/icon/ChevronIcon";
 
 interface AccordionTriggerProps {
   children: ReactNode;
   className?: string;
+  chevron?: boolean;
 }
 
 const AccordionTrigger = (props: AccordionTriggerProps) => {
-  const { children, className } = props;
-  const { openItem, setOpenItem } = useContext(AccordionContext);
+  const { children, className, chevron } = props;
+  const { openItem, setOpenItem, chevronColor } = useContext(AccordionContext);
   const { value } = useContext(AccordionItemContext);
 
   const cls = useMemo(
@@ -31,6 +33,18 @@ const AccordionTrigger = (props: AccordionTriggerProps) => {
       className={cls}
     >
       {children}
+      {chevron && (
+        <ChevronIcon
+          color={chevronColor}
+          style={{
+            width: "32px",
+            transform: openItem.includes(value)
+              ? "rotate(90deg)"
+              : "rotate(-90deg)",
+            transition: "transform 0.3s ease",
+          }}
+        />
+      )}
     </button>
   );
 };

@@ -19,7 +19,13 @@ const CalendarBody = (props: CalendarBodyProps) => {
   return (
     <div className={cls}>
       {weeks.map((week, index) => (
-        <div key={index}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+          key={index}
+        >
           {week.map((day, index) => (
             <CalendarDateCell day={day} key={index}>
               {day.getDate()}

@@ -23,6 +23,7 @@ interface PaginationContextProps {
   totalPageLength: number;
   pages: number[];
   blockSize: number;
+  color?: string;
 }
 
 export const PaginationContext = createContext<PaginationContextProps>({
@@ -32,6 +33,7 @@ export const PaginationContext = createContext<PaginationContextProps>({
   totalPageLength: 0,
   pages: [],
   blockSize: 0,
+  color: "oklch(0.637 0.237 25.331)",
 });
 
 interface PagenationProps extends HTMLAttributes<HTMLDivElement> {
@@ -42,6 +44,7 @@ interface PagenationProps extends HTMLAttributes<HTMLDivElement> {
   onPageChange: (value: number) => void;
   blockSize?: number;
   pageSize?: number;
+  color?: string;
 }
 
 const Pagination: FC<PagenationProps> & PaginationCompoundProps = (props) => {
@@ -53,6 +56,7 @@ const Pagination: FC<PagenationProps> & PaginationCompoundProps = (props) => {
     blockSize = 10,
     pageSize = 20,
     className,
+    color = "oklch(0.637 0.237 25.331)",
   } = props;
   const [currentPage, setCurrentPage] = useState(value);
 
@@ -93,6 +97,7 @@ const Pagination: FC<PagenationProps> & PaginationCompoundProps = (props) => {
     totalPageLength,
     pages,
     blockSize,
+    color,
   };
 
   return (
