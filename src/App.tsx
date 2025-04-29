@@ -13,8 +13,6 @@ import {
   CarouselXscroll,
   Popover,
 } from "./components";
-import ExamplePage from "./components/Progress/ExamplePage";
-import CarouselInfiniteItem from "@ui/CarouselInfinite/CarouselInfiniteItem";
 
 type SelectedItem = {
   label: ReactNode;
@@ -107,6 +105,8 @@ function App() {
     console.log(selectedValue);
   };
 
+  console.log("baseRect", baseRect.left);
+
   return (
     <>
       <Tabs onChangeTab={handleChangeTab}>
@@ -129,6 +129,7 @@ function App() {
         <Calendar.Navigator />
         <Calendar.Body />
       </Calendar>
+      <h1>브래드크럼</h1>
       <Breadcrumb chevronColor="#fff" width="100px">
         <Breadcrumb.Item href="/a">1</Breadcrumb.Item>
         <Breadcrumb.Item href="/a-a">2</Breadcrumb.Item>
@@ -178,6 +179,17 @@ function App() {
             <Modal.Close>
               <button>닫기</button>
             </Modal.Close>
+
+            <Accordion>
+              <Accordion.Item value="item-1">
+                <Accordion.Trigger>item-1 trigger</Accordion.Trigger>
+                <Accordion.Content>item-1 Content.</Accordion.Content>
+              </Accordion.Item>
+              <Accordion.Item value="item-2">
+                <Accordion.Trigger>item-2 trigger</Accordion.Trigger>
+                <Accordion.Content>item-2 Content.</Accordion.Content>
+              </Accordion.Item>
+            </Accordion>
             <Popover position="bottom-left">
               <Popover.Trigger>Open</Popover.Trigger>
               <Popover.Content>
@@ -186,25 +198,11 @@ function App() {
             </Popover>
           </div>
         </Modal.Content>
-      </Modal>{" "}
+      </Modal>
       <Popover position="bottom-left">
         <Popover.Trigger>Open</Popover.Trigger>
         <Popover.Content>Place content for the popover here.</Popover.Content>
       </Popover>
-      <ExamplePage />
-      <h1>셀렉트</h1>
-      <Select
-        onChange={handleChangeValue}
-        value={selectedValue}
-        item={selectedItem}
-        setItem={setSelectedItem}
-      >
-        <Select.Trigger />
-        <Select.Content>
-          <Select.Item value={"movie"}>영화</Select.Item>
-          <Select.Item value={"actor"}>배우</Select.Item>
-        </Select.Content>
-      </Select>
       <h1>아코디언</h1>
       <Accordion chevronColor="#fff">
         <Accordion.Item value="item-1">
@@ -216,19 +214,42 @@ function App() {
           <Accordion.Content>item-2 Content.</Accordion.Content>
         </Accordion.Item>
       </Accordion>
+      <h1>셀렉트</h1>
+      <Select
+        onChange={handleChangeValue}
+        value={selectedValue}
+        item={selectedItem}
+        setItem={setSelectedItem}
+        selectId="my-popover"
+        chevronColor="red"
+      >
+        <Select.Trigger />
+        <Select.Content>
+          <Select.Item value={"movie"}>영화</Select.Item>
+          <Select.Item value={"actor"}>배우</Select.Item>
+        </Select.Content>
+      </Select>
       <h1>무한캐러샐</h1>
       <CarouselInfinite chevronColor="#fff">
         <CarouselInfinite.ItemContainer>
           <CarouselInfinite.ItemList>
-            <CarouselInfiniteItem index={0}>
-              {() => <div>0</div>}
-            </CarouselInfiniteItem>
-            <CarouselInfiniteItem index={1}>
-              {() => <div>1</div>}
-            </CarouselInfiniteItem>
-            <CarouselInfiniteItem index={2}>
-              {() => <div>1</div>}
-            </CarouselInfiniteItem>
+            <CarouselInfinite.Item index={0}>
+              {() => (
+                <div style={{ width: "80vw", backgroundColor: "yellow" }}>
+                  0
+                </div>
+              )}
+            </CarouselInfinite.Item>
+            <CarouselInfinite.Item index={1}>
+              {() => (
+                <div style={{ width: "80vw", backgroundColor: "blue" }}>1</div>
+              )}
+            </CarouselInfinite.Item>
+            <CarouselInfinite.Item index={2}>
+              {() => (
+                <div style={{ width: "80vw", backgroundColor: "red" }}>1</div>
+              )}
+            </CarouselInfinite.Item>
           </CarouselInfinite.ItemList>
         </CarouselInfinite.ItemContainer>
         <CarouselInfinite.Navigator />
@@ -238,6 +259,9 @@ function App() {
           dotSize={20}
         />
       </CarouselInfinite>
+      <h1 ref={baseRef} style={{ marginLeft: "50px", color: "blue" }}>
+        CarouselXscroll
+      </h1>
       <CarouselXscroll
         chevronColor="#fff"
         baseRect={baseRect}
@@ -245,25 +269,150 @@ function App() {
         itemListRef={itemListRef}
         className="group"
       >
-        <CarouselXscroll.ItemContainer className="h-full">
-          <CarouselXscroll.Items className="flex gap-4">
-            <div className="bg-blue-400 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
+        <CarouselXscroll.ItemContainer>
+          <CarouselXscroll.Items>
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
               1
             </div>
-            <div className="bg-blue-500 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
-              2
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
             </div>
-            <div className="bg-blue-600 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
-              3
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
             </div>
-            <div className="bg-blue-700 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
-              4
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
+            </div>{" "}
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
             </div>
-            <div className="bg-blue-800 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
-              5
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
             </div>
-            <div className="bg-blue-900 w-56 h-56 flex justify-center items-center text-white text-4xl rounded-xl">
-              6
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
+            </div>{" "}
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
+            </div>
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
+            </div>
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
+            </div>{" "}
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
+            </div>
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
+            </div>
+            <div
+              style={{
+                width: "200px",
+                height: "200px",
+                backgroundColor: "beige",
+                margin: "10px",
+              }}
+              onClick={() => console.log("click")}
+            >
+              1
             </div>
           </CarouselXscroll.Items>
         </CarouselXscroll.ItemContainer>

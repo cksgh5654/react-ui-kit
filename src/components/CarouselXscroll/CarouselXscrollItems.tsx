@@ -9,7 +9,7 @@ interface CarouselXscrollItemsProps {
 
 const CarouselXscrollItems: FC<CarouselXscrollItemsProps> = (props) => {
   const { className, children } = props;
-  const { baseRect } = useContext(CarouselXscrollContext);
+  const { baseRect, isDragging } = useContext(CarouselXscrollContext);
 
   const cls = useMemo(
     () =>
@@ -18,13 +18,13 @@ const CarouselXscrollItems: FC<CarouselXscrollItemsProps> = (props) => {
         : carouselXscrollItemsCls,
     [className]
   );
-
   return (
     <div
       style={{
-        left: `${baseRect.left}px`,
+        transform: `translateX(${baseRect.left}px)`,
         display: "flex",
         overflowX: "visible",
+        pointerEvents: isDragging ? "none" : "auto",
       }}
       className={cls}
     >

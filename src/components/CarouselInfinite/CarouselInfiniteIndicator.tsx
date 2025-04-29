@@ -75,10 +75,7 @@ const CarouselInfiniteIndicator: FC<CarouselInfiniteIndicatorProps> = ({
   const renderNumbers = () => (
     <div
       style={{
-        textAlign: "center",
-        fontSize: "16px",
         color: activeColor,
-        marginTop: styleType === "both" ? "8px" : "0",
       }}
     >
       {displayIndex}/{itemLength}
@@ -86,7 +83,7 @@ const CarouselInfiniteIndicator: FC<CarouselInfiniteIndicatorProps> = ({
   );
 
   return (
-    <div className={cls} style={{ marginTop: "16px", padding: "8px" }}>
+    <div className={cls}>
       {(styleType === "dots" || styleType === "both") && renderDots()}
       {(styleType === "numbers" || styleType === "both") && renderNumbers()}
     </div>

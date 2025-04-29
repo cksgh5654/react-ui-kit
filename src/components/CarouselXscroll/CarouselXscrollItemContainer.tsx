@@ -11,11 +11,14 @@ const CarouselXscrollItemContainer = (
   props: CarouselXscrollItemContainerProps
 ) => {
   const { children, className } = props;
-  const { itemListRef, setScrollPosition } = useContext(CarouselXscrollContext);
+  const { itemListRef, setScrollPosition, isDragging, setIsDragging } =
+    useContext(CarouselXscrollContext);
 
-  const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [dragStartX, setDragStartX] = useState(0);
+  const THRESHOLD = 5;
 
   const handleScroll = () => {
     if (itemListRef.current) {
@@ -25,41 +28,59 @@ const CarouselXscrollItemContainer = (
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if (itemListRef.current) {
-      setIsDragging(true);
+      setIsMouseDown(true);
       setStartX(e.pageX - itemListRef.current.offsetLeft);
+      setDragStartX(e.pageX - itemListRef.current.offsetLeft);
       setScrollLeft(itemListRef.current.scrollLeft);
     }
   };
 
   const handleMouseUp = () => {
+    setIsMouseDown(false);
     setIsDragging(false);
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging || !itemListRef.current) return;
+    if (!isMouseDown || !itemListRef.current) return;
     e.preventDefault();
     const x = e.pageX - itemListRef.current.offsetLeft;
     const walk = x - startX;
-    itemListRef.current.scrollLeft = scrollLeft - walk;
+
+    if (!isDragging && Math.abs(x - dragStartX) > THRESHOLD) {
+      setIsDragging(true);
+    }
+
+    if (isDragging) {
+      itemListRef.current.scrollLeft = scrollLeft - walk;
+    }
   };
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     if (itemListRef.current) {
-      setIsDragging(true);
+      setIsMouseDown(true);
       setStartX(e.touches[0].pageX - itemListRef.current.offsetLeft);
+      setDragStartX(e.touches[0].pageX - itemListRef.current.offsetLeft);
       setScrollLeft(itemListRef.current.scrollLeft);
     }
   };
 
   const handleTouchEnd = () => {
+    setIsMouseDown(false);
     setIsDragging(false);
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!isDragging || !itemListRef.current) return;
+    if (!isMouseDown || !itemListRef.current) return;
     const x = e.touches[0].pageX - itemListRef.current.offsetLeft;
     const walk = x - startX;
-    itemListRef.current.scrollLeft = scrollLeft - walk;
+
+    if (!isDragging && Math.abs(x - dragStartX) > THRESHOLD) {
+      setIsDragging(true);
+    }
+
+    if (isDragging) {
+      itemListRef.current.scrollLeft = scrollLeft - walk;
+    }
   };
 
   const cls = useMemo(
@@ -92,6 +113,7 @@ const CarouselXscrollItemContainer = (
       onTouchMove={handleTouchMove}
       style={{
         overflow: "scroll",
+        position: "relative",
         display: "flex",
         alignItems: "center",
         scrollbarWidth: "none",

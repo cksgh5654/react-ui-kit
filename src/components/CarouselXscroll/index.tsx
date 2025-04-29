@@ -24,6 +24,8 @@ interface CarouselXscrollContextProps {
   setScrollPosition: (position: number) => void;
   pixelMove: number;
   chevronColor?: string;
+  isDragging: boolean;
+  setIsDragging: (isDragging: boolean) => void;
 }
 
 interface CarouselXscrollProps {
@@ -43,6 +45,8 @@ export const CarouselXscrollContext =
     setScrollPosition: () => {},
     pixelMove: 0,
     chevronColor: "#000000",
+    isDragging: false,
+    setIsDragging: () => {},
   });
 
 const CarouselXscroll: FC<CarouselXscrollProps> &
@@ -57,6 +61,7 @@ const CarouselXscroll: FC<CarouselXscrollProps> &
   } = props;
 
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   const contextValue = {
     itemListRef,
@@ -65,6 +70,8 @@ const CarouselXscroll: FC<CarouselXscrollProps> &
     setScrollPosition,
     pixelMove,
     chevronColor,
+    isDragging,
+    setIsDragging,
   };
 
   const cls = useMemo(
