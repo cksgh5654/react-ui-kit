@@ -25,7 +25,6 @@ const SelectTrigger = (props: SelectTriggerProps) => {
       style={{
         position: "relative",
         display: "flex",
-        justifyContent: "center",
         alignItems: "center",
         cursor: "pointer",
       }}

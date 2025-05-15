@@ -32,7 +32,6 @@ interface CarouselInfiniteContextProps {
   setCarouselIndex: Dispatch<SetStateAction<number>>;
   transition: boolean;
   setTransition: Dispatch<SetStateAction<boolean>>;
-  displayIndex: number;
   handlePrev: () => void;
   handleNext: () => void;
   isTransitioning: boolean;
@@ -51,6 +50,7 @@ interface CarouselInfiniteProps {
   chevronColor?: string;
   activeColor?: string;
   inactiveColor?: string;
+  initialIndex?: number;
 }
 
 export const CarouselInfiniteContext =
@@ -61,7 +61,6 @@ export const CarouselInfiniteContext =
     setCarouselIndex: () => {},
     transition: true,
     setTransition: () => {},
-    displayIndex: 1,
     handlePrev: () => {},
     handleNext: () => {},
     isTransitioning: false,
@@ -76,14 +75,14 @@ export const CarouselInfiniteContext =
 
 const CarouselInfinite: FC<CarouselInfiniteProps> &
   CarouselInfiniteCompoundProps = (props) => {
-  const [carouselIndex, setCarouselIndex] = useState<number>(1);
-  const [itemLength, setItemLength] = useState<number>(0);
+  const { children, className, chevronColor, initialIndex = 1 } = props;
+  const [carouselIndex, setCarouselIndex] = useState(initialIndex);
+  const [itemLength, setItemLength] = useState(0);
   const [transition, setTransition] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [itemWidth, setItemWidth] = useState<number>(0);
-  const [containerWidth, setContainerWidth] = useState<number>(0);
-  const [dragOffset, setDragOffset] = useState<number>(0);
-  const { children, className, chevronColor } = props;
+  const [itemWidth, setItemWidth] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -105,17 +104,7 @@ const CarouselInfinite: FC<CarouselInfiniteProps> &
     updateWidths();
     window.addEventListener("resize", updateWidths);
     return () => window.removeEventListener("resize", updateWidths);
-  }, [children]);
-
-  const displayIndex = useMemo(() => {
-    if (carouselIndex === 0) {
-      return itemLength;
-    } else if (carouselIndex > itemLength) {
-      return 1;
-    } else {
-      return carouselIndex;
-    }
-  }, [carouselIndex, itemLength]);
+  }, [children, carouselIndex]);
 
   const extendeditemLength = itemLength + 2;
 
@@ -163,7 +152,6 @@ const CarouselInfinite: FC<CarouselInfiniteProps> &
     setCarouselIndex,
     transition,
     setTransition,
-    displayIndex,
     handlePrev,
     handleNext,
     isTransitioning,

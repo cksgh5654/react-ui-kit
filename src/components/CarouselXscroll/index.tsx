@@ -19,7 +19,7 @@ interface CarouselXscrollCompoundProps {
 
 interface CarouselXscrollContextProps {
   itemListRef: RefObject<HTMLDivElement | null>;
-  baseRect: DOMRect;
+  baseRect?: DOMRect;
   scrollPosition: number;
   setScrollPosition: (position: number) => void;
   pixelMove: number;
@@ -32,7 +32,7 @@ interface CarouselXscrollProps {
   children: ReactNode;
   className?: string;
   itemListRef: RefObject<HTMLDivElement | null>;
-  baseRect: DOMRect;
+  baseRect?: DOMRect;
   pixelMove: number;
   chevronColor?: string;
 }

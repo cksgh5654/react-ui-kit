@@ -23,7 +23,7 @@ const CarouselInfiniteItemList: FC<CarouselInfiniteItemListProps> = (props) => {
   useEffect(() => {
     const totalItems = Children.count(children);
     setItemLength(totalItems);
-  }, [children, setItemLength]);
+  }, [children]);
 
   const extendedItems = useMemo(() => {
     const items = Children.toArray(children);

@@ -51,11 +51,6 @@ export const paginationBaseCls = getBaseCls("pagination");
 export const paginationButtonsCls = getBaseCls("pagination-buttons");
 export const paginationNavigatorCls = getBaseCls("pagination-navigator");
 
-// Popover Component
-export const popoverBaseCls = getBaseCls("popover");
-export const popoverTriggerCls = getBaseCls("popover-trigger");
-export const popoverContentCls = getBaseCls("popover-content");
-
 // Modal Component
 export const modalBaseCls = getBaseCls("modal");
 export const modalBackdropCls = getBaseCls("modal-backdrop");

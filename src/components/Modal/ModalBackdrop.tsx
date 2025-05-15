@@ -1,15 +1,16 @@
-import { useContext, useMemo } from "react";
+import { ReactNode, useContext, useMemo } from "react";
 import { ModalContext } from ".";
 import { createPortal } from "react-dom";
 import { modalBackdropCls } from "@consts/className";
 
 interface ModalBackdropProps {
   className?: string;
+  children?: ReactNode;
 }
 
 const ModalBackdrop = (props: ModalBackdropProps) => {
   const { open, portalref } = useContext(ModalContext);
-  const { className } = props;
+  const { className, children } = props;
   const cls = useMemo(
     () => (className ? `${className} ${modalBackdropCls}` : modalBackdropCls),
     [className]
@@ -27,7 +28,9 @@ const ModalBackdrop = (props: ModalBackdropProps) => {
               position: "fixed",
             }}
             className={cls}
-          ></div>,
+          >
+            {children}
+          </div>,
           portalref || document.body
         )}
     </>

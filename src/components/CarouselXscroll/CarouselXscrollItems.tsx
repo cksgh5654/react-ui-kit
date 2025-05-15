@@ -21,7 +21,7 @@ const CarouselXscrollItems: FC<CarouselXscrollItemsProps> = (props) => {
   return (
     <div
       style={{
-        transform: `translateX(${baseRect.left}px)`,
+        transform: `translateX(${baseRect?.left ?? 0}px)`,
         display: "flex",
         overflowX: "visible",
         pointerEvents: isDragging ? "none" : "auto",

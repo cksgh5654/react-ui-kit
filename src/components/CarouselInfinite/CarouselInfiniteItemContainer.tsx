@@ -16,7 +16,7 @@ const CarouselInfiniteItemContainer = (
 
   const offset = useMemo(() => {
     return (containerWidth - itemWidth) / 2;
-  }, [containerWidth, itemWidth]);
+  }, [containerWidth, itemWidth, carouselIndex]);
 
   const cls = useMemo(
     () =>

@@ -3,7 +3,6 @@ import { carouselInfiniteItemCls } from "@consts/className";
 import { CarouselInfiniteContext } from ".";
 
 interface CarouselInfiniteItemProps {
-  index: number;
   className?: string;
   children: (carouselIndex: number) => ReactNode;
 }

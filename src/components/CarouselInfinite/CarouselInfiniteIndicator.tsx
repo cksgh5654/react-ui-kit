@@ -19,7 +19,7 @@ const CarouselInfiniteIndicator: FC<CarouselInfiniteIndicatorProps> = ({
 }) => {
   const {
     itemLength,
-    displayIndex,
+    carouselIndex,
     setCarouselIndex,
     setTransition,
     setIsTransitioning,
@@ -34,7 +34,7 @@ const CarouselInfiniteIndicator: FC<CarouselInfiniteIndicatorProps> = ({
   );
 
   const handleClick = (index: number) => {
-    if (index !== displayIndex) {
+    if (index !== carouselIndex) {
       setCarouselIndex(index);
       setTransition(true);
       setIsTransitioning(true);
@@ -59,7 +59,7 @@ const CarouselInfiniteIndicator: FC<CarouselInfiniteIndicatorProps> = ({
             height: `${dotSize}px`,
             borderRadius: "50%",
             backgroundColor:
-              index + 1 === displayIndex ? activeColor : inactiveColor,
+              index + 1 === carouselIndex ? activeColor : inactiveColor,
             border: "none",
             cursor: "pointer",
             transition: "background-color 0.3s",
@@ -78,7 +78,7 @@ const CarouselInfiniteIndicator: FC<CarouselInfiniteIndicatorProps> = ({
         color: activeColor,
       }}
     >
-      {displayIndex}/{itemLength}
+      {carouselIndex}/{itemLength}
     </div>
   );
 

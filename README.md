@@ -320,27 +320,6 @@ const MainPage = () => {
 </Pagination>
 ```
 
-## **Popover**
-
-### Source
-
-[src/components/Popover / react-ui-kit · github](https://github.com/cksgh5654/react-ui-kit/tree/master/src/components/Popover)
-
-### Children
-
-- Root
-- Content
-- Trigger
-
-### Example
-
-```jsx
-<Popover position="bottom-left">
-  <Popover.Trigger>Open</Popover.Trigger>
-  <Popover.Content>Place content for the popover here.</Popover.Content>
-</Popover>
-```
-
 ## **Select**
 
 ### Source

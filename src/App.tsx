@@ -11,7 +11,6 @@ import {
   CarouselInfinite,
   useToast,
   CarouselXscroll,
-  Popover,
 } from "./components";
 
 type SelectedItem = {
@@ -168,7 +167,7 @@ function App() {
         <Modal.Trigger>
           <a href="#">열기</a>
         </Modal.Trigger>
-        <Modal.Content>
+        <Modal.Content fixed>
           <div
             style={{
               width: "200px",
@@ -179,30 +178,42 @@ function App() {
             <Modal.Close>
               <button>닫기</button>
             </Modal.Close>
-
-            <Accordion>
-              <Accordion.Item value="item-1">
-                <Accordion.Trigger>item-1 trigger</Accordion.Trigger>
-                <Accordion.Content>item-1 Content.</Accordion.Content>
-              </Accordion.Item>
-              <Accordion.Item value="item-2">
-                <Accordion.Trigger>item-2 trigger</Accordion.Trigger>
-                <Accordion.Content>item-2 Content.</Accordion.Content>
-              </Accordion.Item>
-            </Accordion>
-            <Popover position="bottom-left">
-              <Popover.Trigger>Open</Popover.Trigger>
-              <Popover.Content>
-                Place content for the popover here.
-              </Popover.Content>
-            </Popover>
+            <CarouselInfinite chevronColor="#fff">
+              <CarouselInfinite.ItemContainer>
+                <CarouselInfinite.ItemList>
+                  <CarouselInfinite.Item>
+                    {() => (
+                      <div style={{ width: "80vw", backgroundColor: "yellow" }}>
+                        1
+                      </div>
+                    )}
+                  </CarouselInfinite.Item>
+                  <CarouselInfinite.Item>
+                    {() => (
+                      <div style={{ width: "80vw", backgroundColor: "blue" }}>
+                        2
+                      </div>
+                    )}
+                  </CarouselInfinite.Item>
+                  <CarouselInfinite.Item>
+                    {() => (
+                      <div style={{ width: "80vw", backgroundColor: "red" }}>
+                        3
+                      </div>
+                    )}
+                  </CarouselInfinite.Item>
+                </CarouselInfinite.ItemList>
+              </CarouselInfinite.ItemContainer>
+              <CarouselInfinite.Navigator />
+              <CarouselInfinite.Indicator
+                activeColor="red"
+                styleType="both"
+                dotSize={20}
+              />
+            </CarouselInfinite>
           </div>
         </Modal.Content>
       </Modal>
-      <Popover position="bottom-left">
-        <Popover.Trigger>Open</Popover.Trigger>
-        <Popover.Content>Place content for the popover here.</Popover.Content>
-      </Popover>
       <h1>아코디언</h1>
       <Accordion chevronColor="#fff">
         <Accordion.Item value="item-1">
@@ -233,21 +244,21 @@ function App() {
       <CarouselInfinite chevronColor="#fff">
         <CarouselInfinite.ItemContainer>
           <CarouselInfinite.ItemList>
-            <CarouselInfinite.Item index={0}>
+            <CarouselInfinite.Item>
               {() => (
                 <div style={{ width: "80vw", backgroundColor: "yellow" }}>
-                  0
+                  1
                 </div>
               )}
             </CarouselInfinite.Item>
-            <CarouselInfinite.Item index={1}>
+            <CarouselInfinite.Item>
               {() => (
-                <div style={{ width: "80vw", backgroundColor: "blue" }}>1</div>
+                <div style={{ width: "80vw", backgroundColor: "blue" }}>2</div>
               )}
             </CarouselInfinite.Item>
-            <CarouselInfinite.Item index={2}>
+            <CarouselInfinite.Item>
               {() => (
-                <div style={{ width: "80vw", backgroundColor: "red" }}>1</div>
+                <div style={{ width: "80vw", backgroundColor: "red" }}>3</div>
               )}
             </CarouselInfinite.Item>
           </CarouselInfinite.ItemList>
@@ -255,10 +266,44 @@ function App() {
         <CarouselInfinite.Navigator />
         <CarouselInfinite.Indicator
           activeColor="red"
-          styleType="dots"
+          styleType="both"
           dotSize={20}
         />
-      </CarouselInfinite>
+      </CarouselInfinite>{" "}
+      <div style={{ width: "100vw" }}>
+        {" "}
+        <CarouselInfinite chevronColor="#fff">
+          <CarouselInfinite.ItemContainer>
+            <CarouselInfinite.ItemList>
+              <CarouselInfinite.Item>
+                {() => (
+                  <div style={{ width: "80vw", backgroundColor: "yellow" }}>
+                    1
+                  </div>
+                )}
+              </CarouselInfinite.Item>
+              <CarouselInfinite.Item>
+                {() => (
+                  <div style={{ width: "80vw", backgroundColor: "blue" }}>
+                    2
+                  </div>
+                )}
+              </CarouselInfinite.Item>
+              <CarouselInfinite.Item>
+                {() => (
+                  <div style={{ width: "80vw", backgroundColor: "red" }}>3</div>
+                )}
+              </CarouselInfinite.Item>
+            </CarouselInfinite.ItemList>
+          </CarouselInfinite.ItemContainer>
+          <CarouselInfinite.Navigator />
+          <CarouselInfinite.Indicator
+            activeColor="red"
+            styleType="both"
+            dotSize={20}
+          />
+        </CarouselInfinite>
+      </div>
       <h1 ref={baseRef} style={{ marginLeft: "50px", color: "blue" }}>
         CarouselXscroll
       </h1>

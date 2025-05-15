@@ -9,7 +9,6 @@ import {
 import { ModalContext } from ".";
 import { createPortal } from "react-dom";
 import { modalContentCls } from "@consts/className";
-import { popoverContentCls } from "@consts/className";
 
 interface ModalContentProps {
   className?: string;
@@ -26,10 +25,7 @@ const ModalContent = (props: ModalContentProps) => {
 
   const handleClickOutside = (e: MouseEvent) => {
     if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
-      if (
-        e.target instanceof HTMLElement &&
-        e.target.closest(`.${popoverContentCls}`)
-      ) {
+      if (e.target instanceof HTMLElement) {
         return;
       }
       onCloseModal();

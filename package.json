@@ -1,7 +1,7 @@
 {
   "name": "parkchanho-react-ui-kit",
   "private": false,
-  "version": "0.1.231",
+  "version": "0.1.253",
   "type": "module",
   "scripts": {
     "dev": "vite",
