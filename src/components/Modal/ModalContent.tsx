@@ -25,9 +25,6 @@ const ModalContent = (props: ModalContentProps) => {
 
   const handleClickOutside = (e: MouseEvent) => {
     if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
-      if (e.target instanceof HTMLElement) {
-        return;
-      }
       onCloseModal();
     }
   };
