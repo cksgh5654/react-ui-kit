@@ -9,6 +9,7 @@ import {
 import { ModalContext } from ".";
 import { createPortal } from "react-dom";
 import { modalContentCls } from "@consts/className";
+import { modalBackdropCls } from "@consts/className";
 
 interface ModalContentProps {
   className?: string;
@@ -24,7 +25,13 @@ const ModalContent = (props: ModalContentProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (e: MouseEvent) => {
-    if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
+    const target = e.target as HTMLElement;
+
+    if (
+      contentRef.current &&
+      !contentRef.current.contains(target) &&
+      target.classList.contains(`${modalBackdropCls}`)
+    ) {
       onCloseModal();
     }
   };
@@ -34,9 +41,7 @@ const ModalContent = (props: ModalContentProps) => {
 
     if (rootElement) {
       if (open) {
-        document.addEventListener("click", handleClickOutside, {
-          capture: true,
-        });
+        document.addEventListener("click", handleClickOutside);
         setScrollY(window.scrollY);
         rootElement.style.top = `-${scrollY}px`;
         rootElement.style.position = "fixed";

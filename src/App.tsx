@@ -304,165 +304,167 @@ function App() {
           />
         </CarouselInfinite>
       </div>
-      <h1 ref={baseRef} style={{ marginLeft: "50px", color: "blue" }}>
-        CarouselXscroll
-      </h1>
-      <CarouselXscroll
-        chevronColor="#fff"
-        baseRect={baseRect}
-        pixelMove={modalRect.width}
-        itemListRef={itemListRef}
-        className="group"
-      >
-        <CarouselXscroll.ItemContainer>
-          <CarouselXscroll.Items>
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>{" "}
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>{" "}
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>{" "}
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>
-            <div
-              style={{
-                width: "200px",
-                height: "200px",
-                backgroundColor: "beige",
-                margin: "10px",
-              }}
-              onClick={() => console.log("click")}
-            >
-              1
-            </div>
-          </CarouselXscroll.Items>
-        </CarouselXscroll.ItemContainer>
-        <CarouselXscroll.Navigator />
-      </CarouselXscroll>
+      <div style={{ padding: "0px 120px" }}>
+        <CarouselXscroll
+          chevronColor="#fff"
+          baseRect={baseRect}
+          pixelMove={modalRect.width}
+          itemListRef={itemListRef}
+          className="group"
+        >
+          <h1 ref={baseRef} style={{ marginLeft: "50px", color: "blue" }}>
+            CarouselXscroll
+          </h1>
+          <CarouselXscroll.ItemContainer>
+            <CarouselXscroll.Items>
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>{" "}
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>{" "}
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>{" "}
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "beige",
+                  margin: "10px",
+                }}
+                onClick={() => console.log("click")}
+              >
+                1
+              </div>
+            </CarouselXscroll.Items>
+          </CarouselXscroll.ItemContainer>
+          <CarouselXscroll.Navigator />
+        </CarouselXscroll>
+      </div>
       <h1>토스트</h1>
       <button onClick={handleClickOpenToast}>open toast</button>;
       <ul>
